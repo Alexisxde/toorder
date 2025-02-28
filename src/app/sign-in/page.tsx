@@ -1,8 +1,8 @@
-import SignInButton from "@/components/SignInButton"
 import Nextjs from "@/components/icons/Nextjs"
 import React from "@/components/icons/React"
 import Supabase from "@/components/icons/Supabase"
 import TailWind from "@/components/icons/Tailwind"
+import SignInButton from "@/components/ui/SignInButton"
 
 export default function SignIn() {
 	return (

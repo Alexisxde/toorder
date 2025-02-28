@@ -4,7 +4,7 @@ import Todo from "@/components/Todo"
 import { useUser } from "@/context/AuthContext"
 import { redirect } from "next/navigation"
 
-export default async function Home() {
+export default function Home() {
 	const { user } = useUser()
 	if (user === null) redirect("/sign-in")
 
