@@ -22,7 +22,7 @@ export default function Column({
 	const [active, setActive] = useState(false)
 	const cardFilter = cards.filter(c => c.column === column)
 
-	const handleDragStart = (e: any, card: CardType) => {
+	const handleDragStart = (e: DragEvent<unknown>, card: CardType) => {
 		e.dataTransfer.setData("cardId", card.id)
 	}
 

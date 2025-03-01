@@ -1,4 +1,3 @@
-import { AuthProvider } from "@/context/AuthContext"
 import "@/globals.css"
 import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
@@ -16,9 +15,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="es">
-			<body className={poppins.className}>
-				<AuthProvider>{children}</AuthProvider>
-			</body>
+			<body className={poppins.className}>{children}</body>
 		</html>
 	)
 }

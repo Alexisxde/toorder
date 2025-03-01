@@ -1,12 +1,15 @@
-"use client"
 import Header from "@/components/Header"
 import Todo from "@/components/Todo"
-import { useUser } from "@/context/AuthContext"
+import { createClientForServer } from "@/supabase/server"
 import { redirect } from "next/navigation"
 
-export default function Home() {
-	const { user } = useUser()
-	if (user === null) redirect("/sign-in")
+export default async function Home() {
+	const supabase = createClientForServer()
+	const {
+		data: { user }
+	} = await (await supabase).auth.getUser()
+
+	if (!user) redirect("/sign-in")
 
 	return (
 		<>
