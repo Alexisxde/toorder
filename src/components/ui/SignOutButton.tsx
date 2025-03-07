@@ -23,7 +23,7 @@ export default function SignOutButton({
 	return (
 		<button
 			type="button"
-			className="rounded-lg border border-neutral-700/80 bg-neutral-800 px-2.5 py-1 text-xs text-neutral-100 transition duration-200 ease-in select-none hover:border-neutral-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200 focus:outline-none"
+			className="rounded-lg border border-neutral-800 bg-neutral-900 px-2.5 py-1 text-xs text-neutral-100 transition duration-200 ease-in select-none hover:border-neutral-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200 focus:outline-none"
 			onClick={signOut}>
 			{children}
 		</button>

@@ -17,7 +17,7 @@ export default async function SignIn() {
 
 	return (
 		<>
-			<div className="absolute inset-0 size-full bg-neutral-950">
+			<div className="absolute inset-0 size-full bg-neutral-900">
 				<div className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_400px_at_50%_-100%,#ff00ff30,transparent)]"></div>
 				<div className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_400px_at_50%_200%,#00ffff30,transparent)]"></div>
 				<div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[size:100px_100px]"></div>

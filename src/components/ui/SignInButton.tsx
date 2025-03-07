@@ -23,7 +23,7 @@ export default function SignInButton() {
 	return (
 		<button
 			type="button"
-			className="flex w-56 cursor-pointer items-center justify-center rounded-lg bg-neutral-800 px-4 py-2 text-center text-xs font-semibold text-white shadow-md transition duration-200 ease-in select-none hover:bg-neutral-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200 focus:outline-none"
+			className="flex w-56 cursor-pointer items-center justify-center rounded-lg bg-neutral-800 px-4 py-2 text-center text-xs font-semibold text-neutral-100 shadow-md transition duration-200 ease-in select-none hover:bg-neutral-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200 focus:outline-none"
 			onClick={signInWithGithub}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

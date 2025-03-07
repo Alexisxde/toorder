@@ -2,6 +2,18 @@
 
 @theme {
 	--container-8xl: 1356px;
+	--animate-fade-in: fade-in 500ms forwards;
+
+	@keyframes fade-in {
+		0% {
+			transform: translateY(8px);
+			opacity: 0;
+		}
+		100% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
 }
 
 :root {

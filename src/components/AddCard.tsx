@@ -67,7 +67,7 @@ export default function AddCard({ column }: Props) {
 							</button>
 							<button
 								type="submit"
-								className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-xs text-neutral-950 transition-colors hover:bg-neutral-300">
+								className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-xs text-neutral-900 transition-colors hover:bg-neutral-300">
 								<span>Añadir</span>
 								<PlusIcon className="size-3" />
 							</button>
