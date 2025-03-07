@@ -3,9 +3,11 @@ export type CardTitle = string
 export type CardColumn = "new" | "todo" | "process" | "completed"
 
 export interface Card {
-	id: CardId
-	title: CardTitle
-	column: CardColumn
+	id: string
+	description: string
+	column: string
+	project_id: string
+	create_at: string
 }
 
 export interface User {

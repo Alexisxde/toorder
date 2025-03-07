@@ -2,38 +2,41 @@
 import AddCard from "@/components/AddCard"
 import Card from "@/components/Card"
 import DropIndicator from "@/components/DropIndicator"
-import type { Card as CardType } from "@/types"
-import type { Dispatch, DragEvent, SetStateAction } from "react"
+import type { CardColumn, Card as CardType } from "@/types"
+import { redirect } from "next/navigation"
 import { useState } from "react"
 
-interface Props extends Omit<CardType, "id"> {
+interface Props {
+	title: string
+	column: string
 	headingColor: string
 	cards: CardType[]
-	setCards: Dispatch<SetStateAction<CardType[]>>
+	// setCards: Dispatch<SetStateAction<CardType[]>>
 }
 
 export default function Column({
 	title,
 	column,
 	headingColor,
-	cards,
-	setCards
+	cards
+	// setCards
 }: Props) {
+	if (cards === null) redirect("/") // <-- Acá redirigimos o mostramos un mensaje de error.
 	const [active, setActive] = useState(false)
-	const cardFilter = cards.filter(c => c.column === column)
+	const cardFilter = cards?.filter(c => c.column === column)
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const handleDragStart = (e: any, card: CardType) => {
 		e.dataTransfer.setData("cardId", card.id)
 	}
 
-	const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
 		highlightIndicator(e)
 		setActive(true)
 	}
 
-	const highlightIndicator = (e: DragEvent<HTMLDivElement>) => {
+	const highlightIndicator = (e: React.DragEvent<HTMLDivElement>) => {
 		const indicators = getIndicator()
 		clearHighlight(indicators)
 		const el = getNearestIndicator(e, indicators)
@@ -48,7 +51,7 @@ export default function Column({
 	}
 
 	const getNearestIndicator = (
-		e: DragEvent<HTMLDivElement>,
+		e: React.DragEvent<HTMLDivElement>,
 		indicators: HTMLElement[]
 	): { offset: number; element: HTMLElement } => {
 		const DISTANCE_OFFSET = 50
@@ -78,7 +81,7 @@ export default function Column({
 		clearHighlight()
 	}
 
-	const handleDragEnd = (e: DragEvent<HTMLDivElement>) => {
+	const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
 		setActive(false)
 		clearHighlight()
 
@@ -103,16 +106,16 @@ export default function Column({
 				if (insertedAtIndex === undefined) return
 				copy.splice(insertedAtIndex, 0, cardToTransfer)
 			}
-			setCards(copy)
+			// setCards(copy)
 		}
 	}
 
 	return (
 		<section className="w-full min-w-56">
-			<div className="mb-3 flex items-center justify-between">
+			<div className="mb-2 flex items-center justify-between">
 				<h3 className={`font-medium ${headingColor}`}>{title}</h3>
 				<span className="rounded text-sm text-neutral-400">
-					{cardFilter.length}
+					{cardFilter?.length}
 				</span>
 			</div>
 			<div
@@ -120,11 +123,11 @@ export default function Column({
 				onDragOver={handleDragOver}
 				onDragLeave={handleDragLeave}
 				className={`h-full w-full transition-colors ${active ? "bg-neutral-800/50" : "bg-slate-800/0"}`}>
-				{cardFilter.map(c => (
+				{cardFilter?.map(c => (
 					<Card key={c.id} {...c} handleDragStart={handleDragStart} />
 				))}
 				<DropIndicator beforeId="-1" column={column} />
-				<AddCard column={column} setCards={setCards} />
+				<AddCard column={column as CardColumn} />
 			</div>
 		</section>
 	)

@@ -1,8 +1,6 @@
-import type { CardColumn, CardId } from "@/types"
-
 interface Props {
-	beforeId: CardId
-	column: CardColumn
+	beforeId: string
+	column: string
 }
 
 export default function DropIndicator({ beforeId, column }: Props) {

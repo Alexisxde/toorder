@@ -15,7 +15,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="es">
-			<body className={poppins.className}>{children}</body>
+			<body className={`max-w-8xl mx-auto ${poppins.className}`}>
+				{children}
+			</body>
 		</html>
 	)
 }

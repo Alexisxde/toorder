@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+	--container-8xl: 1356px;
+}
+
 :root {
 	@apply bg-neutral-900 text-neutral-100;
 }

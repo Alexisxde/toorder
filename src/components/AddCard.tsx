@@ -1,16 +1,16 @@
 "use client"
-import type { Card, CardColumn } from "@/types.d.ts"
+import type { CardColumn } from "@/types.d.ts"
 import { ExclamationCircleIcon, PlusIcon } from "@heroicons/react/24/solid"
 import { AnimatePresence, motion } from "framer-motion"
-import type { ChangeEvent, Dispatch, SetStateAction } from "react"
+import type { ChangeEvent } from "react"
 import { useState } from "react"
 
 interface Props {
 	column: CardColumn
-	setCards: Dispatch<SetStateAction<Card[]>>
+	// setCards: Dispatch<SetStateAction<Card[]>>
 }
 
-export default function AddCard({ column, setCards }: Props) {
+export default function AddCard({ column }: Props) {
 	const [text, setText] = useState("")
 	const [adding, setAdding] = useState(false)
 	const [error, setError] = useState(false)
@@ -24,14 +24,14 @@ export default function AddCard({ column, setCards }: Props) {
 			}, 4000)
 			return
 		}
-		const newCard: Card = {
-			id: Math.random().toString(),
-			title: text.trim(),
-			column
-		}
-		setCards(pv => [...pv, newCard])
-		setAdding(false)
-		setText("")
+		// const newCard: Card = {
+		// 	id: Math.random().toString(),
+		// 	description: text.trim(),
+		// 	column
+		// }
+		// setCards(pv => [...pv, newCard])
+		// setAdding(false)
+		// setText("")
 	}
 
 	return (
