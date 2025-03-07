@@ -5,11 +5,12 @@ import { Card } from "@/types"
 import { redirect } from "next/navigation"
 
 interface Props {
-	searchParams: { id: string }
+	searchParams: Promise<{ id?: string }>
 }
 
 export default async function ProjectPage({ searchParams }: Props) {
-	const id = searchParams?.id
+	const params = await searchParams
+	const { id } = params
 	if (!id) redirect("/")
 
 	const supabase = await createClientForServer()

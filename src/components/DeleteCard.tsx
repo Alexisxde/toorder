@@ -1,13 +1,12 @@
 "use client"
-import type { Card } from "@/types"
 import { FireIcon, TrashIcon } from "@heroicons/react/24/solid"
 import { useState } from "react"
 
 interface Props {
-	setCards: React.Dispatch<React.SetStateAction<Card[]>>
+	// setCards: React.Dispatch<React.SetStateAction<Card[]>>
 }
 
-export default function DeleteCard({ setCards }: Props) {
+export default function DeleteCard({}: Props) {
 	const [active, setActive] = useState(false)
 
 	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -21,7 +20,7 @@ export default function DeleteCard({ setCards }: Props) {
 
 	const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
 		const cardId = e.dataTransfer.getData("cardId")
-		setCards(pv => pv.filter(c => c.id !== cardId))
+		// setCards(pv => pv.filter(c => c.id !== cardId))
 		setActive(false)
 	}
 

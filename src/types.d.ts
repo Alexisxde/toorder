@@ -6,8 +6,8 @@ export interface Card {
 	id: string
 	description: string
 	column: string
-	project_id: string
-	create_at: string
+	project_id?: string
+	create_at?: string
 }
 
 export interface User {
