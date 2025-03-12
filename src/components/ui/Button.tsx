@@ -1,3 +1,4 @@
+"use client"
 import { cn } from "@/lib/utils"
 import { type ComponentProps } from "react"
 
@@ -10,6 +11,7 @@ export default function Button({
 	children,
 	variant = "green",
 	size = "md",
+	onClick,
 	className
 }: Props) {
 	const variants: Record<string, string> = {
@@ -30,7 +32,8 @@ export default function Button({
 				variants[variant] || variants.green,
 				sizes[size] || sizes.md,
 				className
-			)}>
+			)}
+			onClick={onClick}>
 			{children}
 		</button>
 	)
