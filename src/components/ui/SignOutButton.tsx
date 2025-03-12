@@ -1,12 +1,12 @@
 "use client"
+import Button from "@/components/ui/Button"
 import { createClient } from "@/supabase/client"
 import { useRouter } from "next/navigation"
+import { type ComponentProps } from "react"
 
-export default function SignOutButton({
-	children
-}: {
-	children: React.ReactNode
-}) {
+interface Props extends ComponentProps<"button"> {}
+
+export default function SignOutButton({ children }: Props) {
 	const supabase = createClient()
 	const router = useRouter()
 
@@ -21,11 +21,8 @@ export default function SignOutButton({
 	}
 
 	return (
-		<button
-			type="button"
-			className="rounded-lg border border-neutral-800 bg-neutral-900 px-2.5 py-1 text-xs text-neutral-100 transition duration-200 ease-in select-none hover:border-neutral-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200 focus:outline-none"
-			onClick={signOut}>
+		<Button variant="neutral" onClick={signOut}>
 			{children}
-		</button>
+		</Button>
 	)
 }

@@ -1,46 +1,30 @@
 import Header from "@/components/Header"
 import Button from "@/components/ui/Button"
-import { createClientForServer } from "@/supabase/server"
+import Input from "@/components/ui/Input"
+import { useProject } from "@/hooks/useProject"
+import { useUser } from "@/hooks/useUser"
 import {
-  ChevronRightIcon,
-  MagnifyingGlassIcon
+	ChevronRightIcon,
+	MagnifyingGlassIcon
 } from "@heroicons/react/24/solid"
 import { redirect } from "next/navigation"
 
 export default async function DashboardPage() {
-	const supabase = await createClientForServer()
-	const {
-		data: { user }
-	} = await supabase.auth.getUser()
-
-	if (!user) redirect("/sign-in")
-
-	const { data: projects } = await supabase
-		.from("projects")
-		.select()
-		.eq("user_id", user?.id)
+	const { getUser } = await useUser()
+	const { user } = await getUser()
+	if (!user) redirect("/")
+	const { getProjects } = await useProject()
+	const { data: projects } = await getProjects(user?.id)
 
 	return (
 		<section className="flex flex-1 flex-col">
 			<Header page="Projects" />
 			<main className="p-5">
-				<div className="flex justify-center md:justify-end gap-3 mb-2">
+				<div className="mb-2 flex justify-center gap-3 md:justify-end">
 					<Button>New project</Button>
-					<label className="group flex cursor-not-allowed items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900 px-2.5 py-1 pr-8 text-xs focus-within:border-neutral-700 hover:border-neutral-700">
-						<span className="mr-2">
-							<MagnifyingGlassIcon
-								className="text-neutral-300"
-								width={16}
-								height={16}
-							/>
-						</span>
-						<input
-							className="cursor-not-allowed placeholder:text-neutral-400 focus:outline-none"
-							placeholder="Search for a project"
-							type="text"
-							disabled
-						/>
-					</label>
+					<Input name="search" placeholder="Search for a project" size="sm">
+						<MagnifyingGlassIcon />
+					</Input>
 				</div>
 				<h2 className="mb-2">{user?.user_metadata.preferred_username}'s Org</h2>
 				{!projects ? (
@@ -70,7 +54,6 @@ export default async function DashboardPage() {
 									<ChevronRightIcon width={24} height={24} />
 								</div>
 							</a>
-            
 						))}
 					</div>
 				)}
