@@ -21,7 +21,7 @@ export default async function ProjectPage({ searchParams }: Props) {
 
 	return (
 		<>
-			<Header page={data?.[0].name} />
+			<Header page={data?.[0]?.name} />
 			<Todo tasks={data?.[0].tasks as Card[]} />
 		</>
 	)

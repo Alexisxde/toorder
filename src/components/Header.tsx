@@ -4,7 +4,7 @@ import { createClientForServer } from "@/supabase/server"
 import { redirect } from "next/navigation"
 
 interface Props {
-	page: string
+	page?: string
 }
 
 export default async function Header({ page }: Props) {

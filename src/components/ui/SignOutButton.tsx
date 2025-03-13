@@ -14,7 +14,7 @@ export default function SignOutButton({ children }: Props) {
 		try {
 			const { error } = await supabase.auth.signOut()
 			if (error) throw new Error("Failed to sign out.")
-			router.refresh()
+			router.push("/")
 		} catch (error) {
 			console.error(error) // eslint-disable-line no-console
 		}
