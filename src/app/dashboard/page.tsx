@@ -1,8 +1,7 @@
 import Header from "@/components/Header"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
-import { useProject } from "@/hooks/useProject"
-import { useUser } from "@/hooks/useUser"
+import { createClientForServer } from "@/supabase/server"
 import {
 	ChevronRightIcon,
 	MagnifyingGlassIcon,
@@ -11,11 +10,15 @@ import {
 import { redirect } from "next/navigation"
 
 export default async function DashboardPage() {
-	const { getUser } = await useUser()
-	const { user } = await getUser()
+	const supabase = await createClientForServer()
+	const {
+		data: { user }
+	} = await supabase.auth.getUser()
 	if (!user) redirect("/")
-	const { getProjects } = await useProject()
-	const { data: projects } = await getProjects(user?.id)
+	const { data: projects } = await supabase
+		.from("projects")
+		.select()
+		.eq("user_id", user.id)
 
 	return (
 		<section className="flex flex-1 flex-col">

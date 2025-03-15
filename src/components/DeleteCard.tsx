@@ -2,11 +2,11 @@
 import { FireIcon, TrashIcon } from "@heroicons/react/24/solid"
 import { useState } from "react"
 
-interface Props {
-	// setCards: React.Dispatch<React.SetStateAction<Card[]>>
-}
+// interface Props {
+// setCards: React.Dispatch<React.SetStateAction<Card[]>>
+// }
 
-export default function DeleteCard({}: Props) {
+export default function DeleteCard() {
 	const [active, setActive] = useState(false)
 
 	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {

@@ -1,8 +1,7 @@
 "use client"
-import AddCard from "@/components/AddCard"
 import Card from "@/components/Card"
 import DropIndicator from "@/components/DropIndicator"
-import type { CardColumn, Card as CardType } from "@/types"
+import type { Task } from "@/types"
 import { redirect } from "next/navigation"
 import { useState } from "react"
 
@@ -10,23 +9,16 @@ interface Props {
 	title: string
 	column: string
 	headingColor: string
-	cards: CardType[]
-	// setCards: Dispatch<SetStateAction<CardType[]>>
+	cards: Task[]
 }
 
-export default function Column({
-	title,
-	column,
-	headingColor,
-	cards
-	// setCards
-}: Props) {
+export default function Column({ title, column, headingColor, cards }: Props) {
 	if (cards === null) redirect("/") // <-- Acá redirigimos o mostramos un mensaje de error.
 	const [active, setActive] = useState(false)
-	const cardFilter = cards?.filter(c => c.column === column)
+	const cardFilter = cards.filter(c => c.column === column)
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const handleDragStart = (e: any, card: CardType) => {
+	const handleDragStart = (e: any, card: Task) => {
 		e.dataTransfer.setData("cardId", card.id)
 	}
 
@@ -115,7 +107,7 @@ export default function Column({
 			<div className="mb-2 flex items-center justify-between">
 				<h3 className={`font-medium ${headingColor}`}>{title}</h3>
 				<span className="rounded text-sm text-neutral-400">
-					{cardFilter?.length}
+					{cardFilter.length}
 				</span>
 			</div>
 			<div
@@ -123,11 +115,11 @@ export default function Column({
 				onDragOver={handleDragOver}
 				onDragLeave={handleDragLeave}
 				className={`h-full w-full transition-colors ${active ? "bg-neutral-800/50" : "bg-slate-800/0"}`}>
-				{cardFilter?.map(c => (
-					<Card key={c.id} {...c} handleDragStart={handleDragStart} />
+				{cardFilter.map(c => (
+					<Card key={c.id} task={c} handleDragStart={handleDragStart} />
 				))}
 				<DropIndicator beforeId="-1" column={column} />
-				<AddCard column={column as CardColumn} />
+				{/* <AddCard column={column} /> */}
 			</div>
 		</section>
 	)

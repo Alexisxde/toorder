@@ -1,7 +1,7 @@
 import Header from "@/components/Header"
 import Todo from "@/components/Todo"
 import { createClientForServer } from "@/supabase/server"
-import { Card } from "@/types"
+import { Task } from "@/types"
 import { redirect } from "next/navigation"
 
 interface Props {
@@ -16,13 +16,15 @@ export default async function ProjectPage({ searchParams }: Props) {
 	const supabase = await createClientForServer()
 	const { data } = await supabase
 		.from("projects")
-		.select(`id, name, tasks (id, description, column )`)
+		.select(
+			`id, name, tasks (id, title, description, column, badge, created_at, project_id)`
+		)
 		.eq("tasks.project_id", id)
 
 	return (
 		<>
 			<Header page={data?.[0]?.name} />
-			<Todo tasks={data?.[0].tasks as Card[]} />
+			<Todo tasks={data?.[0].tasks as Task[]} />
 		</>
 	)
 }

@@ -1,12 +1,11 @@
 "use client"
-import type { CardColumn } from "@/types.d.ts"
 import { ExclamationCircleIcon, PlusIcon } from "@heroicons/react/24/solid"
 import { AnimatePresence, motion } from "framer-motion"
 import type { ChangeEvent } from "react"
 import { useState } from "react"
 
 interface Props {
-	column: CardColumn
+	column: string
 	// setCards: Dispatch<SetStateAction<Card[]>>
 }
 

@@ -1,25 +1,10 @@
-export type CardId = string
-export type CardTitle = string
-export type CardColumn = "new" | "todo" | "process" | "completed"
+import type { Database } from "@/supabase/database"
 
-export interface Card {
-	id: string
-	description: string
-	column: string
-	project_id?: string
-	create_at?: string
-}
-
-export interface User {
-	avatar_url: string
-	email: string
-	email_verified: boolean
-	full_name: string
-	iss: string
-	name: string
-	phone_verified: boolean
-	preferred_username: string
-	provider_id: string
-	sub: string
-	user_name: string
-}
+export type TaskColumn = "new" | "todo" | "process" | "completed"
+export type Task = Database["public"]["Tables"]["tasks"]["Row"] & { id: string }
+export type User = Database["public"]["Tables"]["users"]["Row"]
+export interface Project {
+  id: Database["public"]["Tables"]["projects"]["Row"]["id"]
+  name: Database["public"]["Tables"]["projects"]["Row"]["name"]
+  tasks: Task[]
+} 

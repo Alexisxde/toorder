@@ -1,26 +1,28 @@
 import DropIndicator from "@/components/DropIndicator"
-import type { Card } from "@/types"
-import { CalendarDaysIcon } from "@heroicons/react/24/solid"
+import { month } from "@/lib/utils"
+import type { Task } from "@/types"
+import {
+	CalendarDaysIcon,
+	EllipsisVerticalIcon
+} from "@heroicons/react/24/solid"
 import { motion } from "framer-motion"
 
-interface Props extends Card {
+interface Props {
+	task: Task
 	handleDragStart: (
 		e: MouseEvent | TouchEvent | PointerEvent,
-		card: Card
+		task: Task
 	) => void
 }
 
-export default function Card({
-	id,
-	description,
-	column,
-	handleDragStart
-}: Props) {
+export default function Card({ task, handleDragStart }: Props) {
 	const indicators: Record<string, Record<string, string>> = {
 		design: { background: "bg-violet-500", text: "text-violet-500" },
 		develoment: { background: "bg-green-500", text: "text-green-500" },
 		planning: { background: "bg-yellow-500", text: "text-yellow-500" }
 	}
+	const { id, column, description, title, badge, created_at } = task
+	const data_format = new Date(created_at)
 
 	return (
 		<>
@@ -29,28 +31,33 @@ export default function Card({
 				layout
 				layoutId={id}
 				draggable
-				onDragStart={e => handleDragStart(e, { id, description, column })}
+				onDragStart={e => handleDragStart(e, task)}
 				className="cursor-grab space-y-1 rounded border border-neutral-800 bg-neutral-900 p-4 active:cursor-grabbing">
-				<span className="text-sm text-neutral-100">{description}</span>
+				<div className="flex items-start justify-between">
+					<span className="text-sm font-medium text-neutral-100">{title}</span>
+					<button className="ml-2 cursor-pointer">
+						<EllipsisVerticalIcon width="16px" height="16px" />
+					</button>
+				</div>
 				{description && (
-					<p className="text-xs text-neutral-400">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-						corrupti.
-					</p>
+					<p className="text-xs text-neutral-400">{description}</p>
 				)}
 				<div className="my-2 border-b-[0.25px] border-neutral-800"></div>
 				<div className="flex w-full items-center justify-between">
-					{
+					<span
+						className={`me-3 flex items-center text-xs font-medium capitalize ${indicators[badge].text}`}>
 						<span
-							className={`me-3 flex items-center text-xs font-medium ${indicators["develoment"].text}`}>
-							<span
-								className={`me-1.5 flex size-2 shrink-0 rounded-full ${indicators["develoment"].background}`}></span>
-							Develoment
-						</span>
-					}
+							className={`me-1.5 flex size-2 shrink-0 rounded-full ${indicators[badge].background}`}></span>
+						{badge}
+					</span>
 					<div className="inline-flex items-center gap-2 rounded border border-neutral-800 bg-neutral-900 p-1 text-xs">
 						<CalendarDaysIcon width="16px" height="16px" />
-						<span>Feb 28</span>
+						<span>
+							{month(data_format.getMonth())}{" "}
+							{data_format.getDate() < 10
+								? `0${data_format.getDate()}`
+								: data_format.getDate()}
+						</span>
 					</div>
 				</div>
 			</motion.article>

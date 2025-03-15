@@ -5,12 +5,14 @@ import TailWind from "@/components/icons/Tailwind"
 import Button from "@/components/ui/Button"
 import SignInButton from "@/components/ui/SignInButton"
 import SignOutButton from "@/components/ui/SignOutButton"
-import { useUser } from "@/hooks/useUser"
+import { createClientForServer } from "@/supabase/server"
 import { ArrowRightIcon } from "@heroicons/react/16/solid"
 
 export default async function HomePage() {
-	const { getUser } = await useUser()
-	const { user } = await getUser()
+	const supabase = await createClientForServer()
+	const {
+		data: { user }
+	} = await supabase.auth.getUser()
 
 	return (
 		<>

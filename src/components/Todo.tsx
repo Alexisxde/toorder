@@ -1,14 +1,14 @@
 import Column from "@/components/Column"
 import DeleteCard from "@/components/DeleteCard"
 import Button from "@/components/ui/Button"
-import type { Card } from "@/types"
+import type { Task } from "@/types"
 import { PlusIcon } from "@heroicons/react/24/solid"
 
 interface Props {
-	tasks: Card[]
+	tasks: Task[]
 }
 
-export default async function Todos({ tasks }: Props) {
+export default async function Todo({ tasks }: Props) {
 	const columns = [
 		{ title: "Nuevas", column: "new", headingColor: "text-neutral-400" },
 		{ title: "TODO", column: "todo", headingColor: "text-yellow-200" },
