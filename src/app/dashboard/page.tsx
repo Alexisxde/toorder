@@ -1,4 +1,5 @@
 import Header from "@/components/Header"
+import ProjectIcon from "@/components/icons/Project.svg"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
 import { createClientForServer } from "@/supabase/server"
@@ -7,8 +8,9 @@ import {
 	MagnifyingGlassIcon,
 	PlusIcon
 } from "@heroicons/react/24/solid"
-import { redirect } from "next/navigation"
 import type { Metadata } from "next"
+import Image from "next/image"
+import { redirect } from "next/navigation"
 
 export const metadata: Metadata = { title: "Dashboard - Tarea Plus" }
 
@@ -29,6 +31,11 @@ export default async function DashboardPage() {
 			<main className="p-5">
 				{!projects ? (
 					<div className="mx-auto mt-8 flex w-full max-w-xl flex-col items-center justify-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 p-8">
+						<Image
+							className="mb-2"
+							src={ProjectIcon}
+							alt="Project image icon"
+						/>
 						<h2 className="font-medium">Create your first project on Werty</h2>
 						<p className="text-center text-xs text-neutral-400">
 							Establish a clear vision so that managers in your organization can

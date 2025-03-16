@@ -1,8 +1,10 @@
 import Column from "@/components/Column"
 import DeleteCard from "@/components/DeleteCard"
+import TaskIcon from "@/components/icons/Task.svg"
 import Button from "@/components/ui/Button"
 import type { Task } from "@/types"
 import { PlusIcon } from "@heroicons/react/24/solid"
+import Image from "next/image"
 
 interface Props {
 	tasks: Task[]
@@ -22,8 +24,9 @@ export default async function Todo({ tasks }: Props) {
 
 	return (
 		<>
-			{!tasks ? (
+			{tasks.length === 0 ? (
 				<div className="mx-auto mt-8 flex w-full max-w-xl flex-col items-center justify-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 p-8">
+					<Image className="mb-2" src={TaskIcon} alt="Task image icon" />
 					<h2 className="font-medium">Add your first task</h2>
 					<p className="text-center text-xs text-neutral-400">
 						Create a goal for one of your teams that will appear in the team
@@ -31,7 +34,7 @@ export default async function Todo({ tasks }: Props) {
 					</p>
 					<Button className="mt-2 flex items-center justify-center gap-1">
 						<PlusIcon width="16px" height="16px" />
-						<span>Add a Task</span>
+						<span>Add a task</span>
 					</Button>
 				</div>
 			) : (
@@ -41,7 +44,7 @@ export default async function Todo({ tasks }: Props) {
 							className="flex items-center justify-center gap-1"
 							variant="neutral">
 							<PlusIcon width="16px" height="16px" />
-							<span>Add a Task</span>
+							<span>Add a task</span>
 						</Button>
 					</div>
 					<main className="mx-auto flex h-[80dvh] gap-6 px-5">
