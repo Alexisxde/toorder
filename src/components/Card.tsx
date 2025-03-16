@@ -1,10 +1,8 @@
 import DropIndicator from "@/components/DropIndicator"
+import EditDropDown from "@/components/ui/EditDropdown"
 import { month } from "@/lib/utils"
 import type { Task } from "@/types"
-import {
-	CalendarDaysIcon,
-	EllipsisVerticalIcon
-} from "@heroicons/react/24/solid"
+import { CalendarDaysIcon } from "@heroicons/react/24/solid"
 import { motion } from "framer-motion"
 
 interface Props {
@@ -18,7 +16,7 @@ interface Props {
 export default function Card({ task, handleDragStart }: Props) {
 	const indicators: Record<string, Record<string, string>> = {
 		design: { background: "bg-violet-500", text: "text-violet-500" },
-		develoment: { background: "bg-green-500", text: "text-green-500" },
+		development: { background: "bg-green-500", text: "text-green-500" },
 		planning: { background: "bg-yellow-500", text: "text-yellow-500" }
 	}
 	const { id, column, description, title, badge, created_at } = task
@@ -35,9 +33,7 @@ export default function Card({ task, handleDragStart }: Props) {
 				className="cursor-grab space-y-1 rounded border border-neutral-800 bg-neutral-900 p-4 active:cursor-grabbing">
 				<div className="flex items-start justify-between">
 					<span className="text-sm font-medium text-neutral-100">{title}</span>
-					<button className="ml-2 cursor-pointer">
-						<EllipsisVerticalIcon width="16px" height="16px" />
-					</button>
+					<EditDropDown />
 				</div>
 				{description && (
 					<p className="text-xs text-neutral-400">{description}</p>

@@ -8,6 +8,9 @@ import {
 	PlusIcon
 } from "@heroicons/react/24/solid"
 import { redirect } from "next/navigation"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = { title: "Dashboard - Tarea Plus" }
 
 export default async function DashboardPage() {
 	const supabase = await createClientForServer()
