@@ -11,8 +11,8 @@ export default function Button({
 	children,
 	variant = "green",
 	size = "md",
-	onClick,
-	className
+	className,
+	...rest
 }: Props) {
 	const variants: Record<string, string> = {
 		green:
@@ -33,7 +33,7 @@ export default function Button({
 				sizes[size] || sizes.md,
 				className
 			)}
-			onClick={onClick}>
+			{...rest}>
 			{children}
 		</button>
 	)

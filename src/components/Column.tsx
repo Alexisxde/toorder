@@ -18,7 +18,7 @@ export default function Column({ title, column, headingColor, cards }: Props) {
 	const cardFilter = cards.filter(c => c.column === column)
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const handleDragStart = (e: any, card: Task) => {
+	const handleDragStart = (e: DragEvent, card: Task) => {
 		e.dataTransfer.setData("cardId", card.id)
 	}
 

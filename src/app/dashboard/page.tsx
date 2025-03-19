@@ -1,6 +1,7 @@
 import Header from "@/components/Header"
 import ProjectIcon from "@/components/icons/Project.svg"
 import Button from "@/components/ui/Button"
+import ButtonModalProject from "@/components/ui/ButtonModalProject"
 import Input from "@/components/ui/Input"
 import { createClientForServer } from "@/supabase/server"
 import {
@@ -49,7 +50,7 @@ export default async function DashboardPage() {
 				) : (
 					<>
 						<div className="mb-2 flex justify-center gap-3 md:justify-end">
-							<Button>New project</Button>
+							<ButtonModalProject>New project</ButtonModalProject>
 							<Input name="search" placeholder="Search for a project" size="sm">
 								<MagnifyingGlassIcon />
 							</Input>
