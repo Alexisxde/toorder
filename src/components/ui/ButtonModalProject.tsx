@@ -8,7 +8,6 @@ import {
 import Image from "next/image"
 import { useState, type ComponentProps } from "react"
 import { createPortal } from "react-dom"
-import { motion } from "framer-motion"
 
 interface Props extends ComponentProps<"button"> {}
 
@@ -16,8 +15,8 @@ export default function ButtonModalProject({ children, className }: Props) {
 	const [height, setHeight] = useState("auto")
 	const [openModal, setOpenModal] = useState(false)
 
-	const handleInput = (e: any) => {
-		const textarea = e.target
+	const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+		const textarea = e.target as HTMLTextAreaElement
 		setHeight(`${textarea.scrollHeight}px`)
 	}
 
@@ -28,41 +27,43 @@ export default function ButtonModalProject({ children, className }: Props) {
 	const Modal = () => {
 		return (
 			<div
-        className="absolute inset-0 flex w-full items-center justify-center bg-black/10 backdrop-blur-xs"
-        onClick={handleModal}>
-				<div className="mx-10 flex w-full max-w-lg flex-col gap-4 rounded-lg border border-neutral-800 bg-neutral-900 p-10" onClick={(e) => e.stopPropagation()}>
-					<div className="flex flex-col items-center justify-center gap-2">
+				className="flex bg-black/10 justify-center w-full absolute backdrop-blur-xs inset-0 items-center"
+				onClick={handleModal}>
+				<div
+					className="flex flex-col bg-neutral-900 border border-neutral-800 p-10 rounded-lg w-full gap-4 max-w-lg mx-10"
+					onClick={e => e.stopPropagation()}>
+					<div className="flex flex-col justify-center gap-2 items-center">
 						<Image width={150} src={ProjectIcon} alt="Project image icon" />
 						<h2 className="font-medium">Create your new project</h2>
-						<p className="text-center text-xs text-neutral-400">
+						<p className="text-center text-neutral-400 text-xs">
 							Establish a clear vision so that managers in your organization can
 							mobilize their teams to all work in the same direction.
 						</p>
 					</div>
-					<label className="flex w-full items-center justify-start rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 pr-8 text-sm transition-colors duration-200 ease-in-out focus-within:border-neutral-700 hover:border-neutral-700">
-						<span className="mr-2 size-4 text-neutral-300">
+					<label className="flex bg-neutral-900 border border-neutral-800 justify-start rounded-lg text-sm w-full duration-200 ease-in-out focus-within:border-neutral-700 hover:border-neutral-700 items-center pr-8 px-4 py-2 transition-colors">
+						<span className="text-neutral-300 mr-2 size-4">
 							<RectangleStackIcon />
 						</span>
 						<input
-							className="placeholder:text-sm placeholder:text-neutral-400 focus:outline-none"
+							className="focus:outline-none placeholder:text-neutral-400 placeholder:text-sm"
 							placeholder="Name project"
 							type="text"
 							name="name"
 						/>
 					</label>
-					<label className="flex w-full items-start justify-start rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 pr-8 text-sm transition-colors duration-200 ease-in-out focus-within:border-neutral-700 hover:border-neutral-700">
-						<span className="mr-2 size-4 text-neutral-300">
+					<label className="flex bg-neutral-900 border border-neutral-800 justify-start rounded-lg text-sm w-full duration-200 ease-in-out focus-within:border-neutral-700 hover:border-neutral-700 items-start pr-8 px-4 py-2 transition-colors">
+						<span className="text-neutral-300 mr-2 size-4">
 							<ChatBubbleBottomCenterTextIcon />
 						</span>
 						<textarea
-							className="flex-1 resize-none placeholder:text-sm placeholder:text-neutral-400 focus:outline-none"
+							className="flex-1 focus:outline-none placeholder:text-neutral-400 placeholder:text-sm resize-none"
 							placeholder="Description project"
 							name="description"
 							rows={3}
 							onInput={handleInput}
 							style={{ height }}></textarea>
 					</label>
-					<Button className="mx-auto w-52">Create new project</Button>
+					<Button className="w-52 mx-auto">Create new project</Button>
 				</div>
 			</div>
 		)

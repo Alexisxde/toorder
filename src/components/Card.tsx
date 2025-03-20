@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 
 interface Props {
 	task: Task
-	handleDragStart: (e: DragEvent, task: Task) => void
+	handleDragStart: (e: any, task: Task) => void
 }
 
 export default function Card({ task, handleDragStart }: Props) {
