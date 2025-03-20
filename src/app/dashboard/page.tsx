@@ -1,6 +1,5 @@
 import Header from "@/components/Header"
 import ProjectIcon from "@/components/icons/Project.svg"
-import Button from "@/components/ui/Button"
 import ButtonModalProject from "@/components/ui/ButtonModalProject"
 import Input from "@/components/ui/Input"
 import { createClientForServer } from "@/supabase/server"
@@ -26,11 +25,13 @@ export default async function DashboardPage() {
 		.select()
 		.eq("user_id", user.id)
 
+	if (!projects) return
+
 	return (
 		<section className="flex flex-1 flex-col">
 			<Header page="Projects" />
 			<main className="p-5">
-				{!projects ? (
+				{projects?.length === 0 ? (
 					<div className="mx-auto mt-8 flex w-full max-w-xl flex-col items-center justify-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 p-8">
 						<Image
 							className="mb-2"
@@ -42,10 +43,10 @@ export default async function DashboardPage() {
 							Establish a clear vision so that managers in your organization can
 							mobilize their teams to all work in the same direction.
 						</p>
-						<Button className="mt-2 inline-flex items-center justify-center gap-1">
+						<ButtonModalProject className="mt-2 inline-flex items-center justify-center gap-1">
 							<PlusIcon width="16px" height="16px" />
 							<span>Create a Project</span>
-						</Button>
+						</ButtonModalProject>
 					</div>
 				) : (
 					<>
@@ -59,10 +60,10 @@ export default async function DashboardPage() {
 							{user?.user_metadata.preferred_username}'s Org
 						</h2>
 						<div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
-							{projects.map(({ id, name }, i: number) => (
+							{projects?.map(({ id, name, description }, i: number) => (
 								<a
 									key={id}
-									className="group animate-fade-in relative flex h-44 min-h-32 cursor-pointer rounded-md border border-neutral-800 bg-neutral-900 p-5 transition-colors duration-150 ease-in-out hover:border-neutral-700 hover:bg-neutral-800 md:min-h-44"
+									className="animate-fade-in group relative flex h-44 min-h-32 cursor-pointer rounded-md border border-neutral-800 bg-neutral-900 p-5 transition-colors duration-150 ease-in-out hover:border-neutral-700 hover:bg-neutral-800 md:min-h-44"
 									href={`/dashboard/project?id=${id}`}
 									style={{ animationDelay: `calc(0.1s * ${i + 1}` }}>
 									<div className="flex h-full w-full flex-col">
@@ -71,8 +72,7 @@ export default async function DashboardPage() {
 												{name}
 											</p>
 											<span className="text-xs text-neutral-400 lowercase">
-												Lorem ipsum dolor sit, amet consectetur adipisicing
-												elit. Provident harum, debitis id quis dicta at?
+												{description}
 											</span>
 											<div className="flex items-center gap-x-1.5"></div>
 										</div>

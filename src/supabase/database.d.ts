@@ -12,18 +12,21 @@ export type Database = {
       projects: {
         Row: {
           created_at: string
+          description: string | null
           id: string
           name: string | null
           user_id: string | null
         }
         Insert: {
           created_at?: string
+          description?: string | null
           id?: string
           name?: string | null
           user_id?: string | null
         }
         Update: {
           created_at?: string
+          description?: string | null
           id?: string
           name?: string | null
           user_id?: string | null
@@ -45,6 +48,7 @@ export type Database = {
           created_at: string
           description: string | null
           id: number
+          img_url: string | null
           project_id: string
           title: string
         }
@@ -54,6 +58,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: number
+          img_url?: string | null
           project_id?: string
           title: string
         }
@@ -63,6 +68,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: number
+          img_url?: string | null
           project_id?: string
           title?: string
         }
