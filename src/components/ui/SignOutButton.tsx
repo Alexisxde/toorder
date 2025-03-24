@@ -1,5 +1,5 @@
 "use client"
-import Button from "@/components/ui/Button"
+import { Button } from "@/components/ui/Button"
 import { createClient } from "@/supabase/client"
 import { useRouter } from "next/navigation"
 import { type ComponentProps } from "react"
@@ -21,7 +21,7 @@ export default function SignOutButton({ children }: Props) {
 	}
 
 	return (
-		<Button variant="neutral" onClick={signOut}>
+		<Button variant="outline" onClick={signOut}>
 			{children}
 		</Button>
 	)

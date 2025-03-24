@@ -16,7 +16,7 @@ export default function Card({ task, handleDragStart }: Props) {
 		development: { background: "bg-green-500", text: "text-green-500" },
 		planning: { background: "bg-yellow-500", text: "text-yellow-500" }
 	}
-	const { id, column, description, title, badge, created_at } = task
+	const { id, column, description, title, badge, img_url, created_at } = task
 	const data_format = new Date(created_at)
 
 	return (
@@ -33,7 +33,16 @@ export default function Card({ task, handleDragStart }: Props) {
 					<EditDropDown />
 				</div>
 				{description && (
-					<p className="text-xs text-neutral-400">{description}</p>
+					<p className="mb-2 text-xs text-pretty text-neutral-400">
+						{description}
+					</p>
+				)}
+				{img_url && (
+					<img
+						src={img_url}
+						alt={title}
+						className="h-36 w-full rounded-md object-cover"
+					/>
 				)}
 				<div className="my-2 border-b-[0.25px] border-neutral-800"></div>
 				<div className="flex w-full items-center justify-between">

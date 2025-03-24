@@ -3,6 +3,8 @@
 @theme {
 	--container-8xl: 1356px;
 	--animate-fade-in: fade-in 500ms forwards;
+  --animate-slide-in-left: slide-in-left 0.6s ease-out;
+  --animate-slide-in-right: slide-in-right 0.6s ease-out;
 
 	@keyframes fade-in {
 		0% {
@@ -14,6 +16,24 @@
 			opacity: 1;
 		}
 	}
+
+  @keyframes slide-in-left {
+    0% {
+      transform: translateX(-20px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(20px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 }
 
 :root {

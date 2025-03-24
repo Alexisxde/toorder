@@ -1,6 +1,6 @@
 "use client"
 import ProjectIcon from "@/components/icons/Project.svg"
-import Button from "@/components/ui/Button"
+import { Button } from "@/components/ui/Button"
 import { createClient } from "@/supabase/client"
 import {
 	ChatBubbleBottomCenterTextIcon,
@@ -18,7 +18,7 @@ interface Props {
 	className?: string
 }
 
-interface Inputs {
+interface FormData {
 	name: string
 	description: string
 }
@@ -30,13 +30,13 @@ export default function ButtonModalProject({ children, className }: Props) {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<Inputs>()
+	} = useForm<FormData>()
 
 	const handleModal = () => {
 		setOpenModal(!openModal)
 	}
 
-	const onSubmit: SubmitHandler<Inputs> = async form => {
+	const onSubmit: SubmitHandler<FormData> = async form => {
 		const supabase = createClient()
 		const {
 			data: { user }
@@ -53,8 +53,8 @@ export default function ButtonModalProject({ children, className }: Props) {
 	}
 
 	const errorsMessages: Record<string, string> = {
-		minLength: "minimum of 8 characters.",
-		maxLength: "maximum characters 50.",
+		minLength: "Minimum of 8 characters.",
+		maxLength: "Maximum characters 50.",
 		required: "Is required."
 	}
 

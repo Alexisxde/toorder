@@ -1,7 +1,6 @@
 import Header from "@/components/Header"
 import ProjectIcon from "@/components/icons/Project.svg"
 import ButtonModalProject from "@/components/ui/ButtonModalProject"
-import Input from "@/components/ui/Input"
 import { createClientForServer } from "@/supabase/server"
 import {
 	ChevronRightIcon,
@@ -52,9 +51,18 @@ export default async function DashboardPage() {
 					<>
 						<div className="mb-2 flex justify-center gap-3 md:justify-end">
 							<ButtonModalProject>New project</ButtonModalProject>
-							<Input name="search" placeholder="Search for a project" size="sm">
-								<MagnifyingGlassIcon />
-							</Input>
+							<label className="flex cursor-not-allowed items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900 px-2.5 py-1 pr-8 text-xs transition-colors duration-200 ease-in-out focus-within:border-neutral-700 hover:border-neutral-700">
+								<span className="mr-2 size-4 text-neutral-300">
+									<MagnifyingGlassIcon />
+								</span>
+								<input
+									className="cursor-not-allowed placeholder:text-neutral-400 focus:outline-none"
+									placeholder="Search for a project"
+									type="text"
+									name="search"
+									disabled
+								/>
+							</label>
 						</div>
 						<h2 className="mb-2">
 							{user?.user_metadata.preferred_username}'s Org
