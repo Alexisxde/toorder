@@ -45,7 +45,7 @@
 		--scrollbar-color: rgba(255, 255, 255, 0.3);
 	}
 
-	html {
+	* {
 		-webkit-tap-highlight-color: transparent;
 		scrollbar-gutter: stable;
 		scrollbar-color: var(--scrollbar-color) transparent;
