@@ -60,8 +60,8 @@ export default function ButtonModalProject({
 }: Props) {
 	const [open, setOpen] = useState(false)
 	const [image, setImage] = useState<File | null>(null)
-  const router = useRouter()
-  const searchParams = useSearchParams()
+	const router = useRouter()
+	const searchParams = useSearchParams()
 	const {
 		register,
 		handleSubmit,
@@ -69,12 +69,12 @@ export default function ButtonModalProject({
 	} = useForm<FormData>({ resolver: zodResolver(formSchema) })
 
 	const handleModal = () => {
-    const body = document.body;
-    if (body.classList.contains("overflow-hidden")) {
-      body.classList.remove("overflow-hidden")
-    } else {
-      body.classList.add("overflow-hidden")
-    }
+		const body = document.body
+		if (body.classList.contains("overflow-hidden")) {
+			body.classList.remove("overflow-hidden")
+		} else {
+			body.classList.add("overflow-hidden")
+		}
 		setOpen(!open)
 	}
 
@@ -86,19 +86,19 @@ export default function ButtonModalProject({
 		image_url
 	}) => {
 		const supabase = createClient()
-    const project_id = searchParams.get("id")
+		const project_id = searchParams.get("id")
 		await supabase
 			.from("tasks")
 			.insert({
-        title: title.trim(),
+				title: title.trim(),
 				description: description?.trim(),
-        column: "new",
+				column: "new",
 				badge,
 				img_url: image_url,
 				project_id
 			})
 		handleModal()
-    router.refresh()
+		router.refresh()
 	}
 
 	const Modal = () => {
@@ -107,7 +107,7 @@ export default function ButtonModalProject({
 				className="fixed inset-0 z-50 flex justify-end bg-neutral-800/10 backdrop-blur-xs"
 				onClick={handleModal}>
 				<div
-					className="h-auto flex w-sm max-w-md overflow-auto flex-col gap-4 border border-neutral-800 bg-neutral-900 p-5 mr-2"
+					className="mr-2 flex h-auto w-sm max-w-md flex-col gap-4 overflow-auto border border-neutral-800 bg-neutral-900 p-5"
 					onClick={e => e.stopPropagation()}>
 					<div className="flex items-center justify-between">
 						<h3 className="text-lg font-medium">Create task</h3>
@@ -117,7 +117,7 @@ export default function ButtonModalProject({
 					</div>
 					<form
 						className="grid gap-2"
-            autoComplete="nope"
+						autoComplete="nope"
 						onSubmit={handleSubmit(onSubmit)}
 						encType="multipart/form-data">
 						<div className="grid w-full max-w-sm items-center gap-1.5">
@@ -142,7 +142,8 @@ export default function ButtonModalProject({
 							<select
 								id="badge"
 								className={cn(
-									"focus-active:border-neutral-700 flex rounded-md border border-neutral-800 bg-transparent px-3 py-1 text-base shadow-sm transition-colors hover:border-neutral-700 focus:border-neutral-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", errors?.badge && "border-red-500"
+									"focus-active:border-neutral-700 flex rounded-md border border-neutral-800 bg-transparent px-3 py-1 text-base shadow-sm transition-colors hover:border-neutral-700 focus:border-neutral-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+									errors?.badge && "border-red-500"
 								)}
 								{...register("badge")}>
 								<option className="bg-neutral-800 text-neutral-500" value="">
@@ -176,7 +177,7 @@ export default function ButtonModalProject({
 						<div className="grid w-full max-w-sm items-center gap-1.5">
 							<Label htmlFor="description">Description task</Label>
 							<textarea
-                id="description"
+								id="description"
 								className="focus-active:border-neutral-700 flex w-full flex-1 resize-none rounded-md border border-neutral-800 bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-sm placeholder:text-neutral-500 hover:border-neutral-700 focus:border-neutral-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
 								{...register("description")}
 								rows={3}
@@ -196,13 +197,13 @@ export default function ButtonModalProject({
 										<img src={URL.createObjectURL(image)} className="h-32" />
 									</div>
 								) : (
-									<div className="flex h-32 items-center justify-center border border-neutral-800 bg-neutral-900 opacity-50 cursor-not-allowed">
+									<div className="flex h-32 cursor-not-allowed items-center justify-center border border-neutral-800 bg-neutral-900 opacity-50">
 										<PhotoIcon className="size-10" />
 									</div>
 								)}
 								<Input
 									type="file"
-                  disabled
+									disabled
 									className={errors?.image && "border-red-500"}
 									accept=".jpg, .jpeg, .png"
 									{...register("image")}
