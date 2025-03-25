@@ -1,13 +1,12 @@
 "use client"
+import { createClient } from "@/supabase/client"
 import { FireIcon, TrashIcon } from "@heroicons/react/24/solid"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
-
-// interface Props {
-// setCards: React.Dispatch<React.SetStateAction<Card[]>>
-// }
 
 export default function DeleteCard() {
 	const [active, setActive] = useState(false)
+	const router = useRouter()
 
 	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
@@ -18,10 +17,12 @@ export default function DeleteCard() {
 		setActive(false)
 	}
 
-	const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+	const handleDragEnd = async (e: React.DragEvent<HTMLDivElement>) => {
 		const cardId = e.dataTransfer.getData("cardId")
-		// setCards(pv => pv.filter(c => c.id !== cardId))
+		const supabase = createClient()
+		await supabase.from("tasks").delete().eq("id", cardId)
 		setActive(false)
+		router.refresh()
 	}
 
 	return (

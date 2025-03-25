@@ -14,7 +14,8 @@ export default function Card({ task, handleDragStart }: Props) {
 	const indicators: Record<string, Record<string, string>> = {
 		design: { background: "bg-violet-500", text: "text-violet-500" },
 		development: { background: "bg-green-500", text: "text-green-500" },
-		planning: { background: "bg-yellow-500", text: "text-yellow-500" }
+		planning: { background: "bg-yellow-500", text: "text-yellow-500" },
+		study: { background: "bg-blue-500", text: "text-blue-500" }
 	}
 	const { id, column, description, title, badge, img_url, created_at } = task
 	const data_format = new Date(created_at)

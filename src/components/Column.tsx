@@ -1,8 +1,9 @@
 "use client"
 import Card from "@/components/Card"
+import { createClient } from "@/supabase/client"
 import DropIndicator from "@/components/DropIndicator"
 import type { Task } from "@/types"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useState } from "react"
 
 interface Props {
@@ -13,8 +14,8 @@ interface Props {
 }
 
 export default function Column({ title, column, headingColor, cards }: Props) {
-	if (cards === null) redirect("/") // <-- Acá redirigimos o mostramos un mensaje de error.
 	const [active, setActive] = useState(false)
+  const router = useRouter()
 	const cardFilter = cards.filter(c => c.column === column)
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -73,7 +74,7 @@ export default function Column({ title, column, headingColor, cards }: Props) {
 		clearHighlight()
 	}
 
-	const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+	const handleDragEnd = async (e: React.DragEvent<HTMLDivElement>) => {
 		setActive(false)
 		clearHighlight()
 
@@ -83,22 +84,9 @@ export default function Column({ title, column, headingColor, cards }: Props) {
 		const before = element.dataset.before || "-1"
 
 		if (before !== cardId) {
-			let copy = [...cards]
-			let cardToTransfer = copy.find(c => c.id === cardId)
-
-			if (!cardToTransfer) return
-
-			cardToTransfer = { ...cardToTransfer, column }
-			copy = copy.filter(c => c.id !== cardId)
-
-			if (before === "-1") {
-				copy.push(cardToTransfer)
-			} else {
-				const insertedAtIndex = copy.findIndex(el => el.id === before)
-				if (insertedAtIndex === undefined) return
-				copy.splice(insertedAtIndex, 0, cardToTransfer)
-			}
-			// setCards(copy)
+      const supabase = createClient()
+      await supabase.from("tasks").update({ column }).eq("id", cardId)
+      router.refresh()
 		}
 	}
 

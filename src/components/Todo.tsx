@@ -45,7 +45,7 @@ export default async function Todo({ tasks }: Props) {
 							<span>Add a task</span>
 						</ButtonModalTask>
 					</div>
-					<main className="mx-auto flex h-[80dvh] gap-6 px-5 overflow-hidden">
+					<main className="mx-auto flex gap-6 px-5">
 						{columns.map(({ title, column, headingColor }) => (
 							<Column
 								key={column}
