@@ -107,7 +107,7 @@ export default function ButtonModalProject({
 				className="fixed inset-0 z-50 flex justify-end bg-neutral-800/10 backdrop-blur-xs"
 				onClick={handleModal}>
 				<div
-					className="h-auto flex w-sm max-w-md overflow-auto flex-col gap-4 border border-neutral-800 bg-neutral-900 p-5"
+					className="h-auto flex w-sm max-w-md overflow-auto flex-col gap-4 border border-neutral-800 bg-neutral-900 p-5 mr-2"
 					onClick={e => e.stopPropagation()}>
 					<div className="flex items-center justify-between">
 						<h3 className="text-lg font-medium">Create task</h3>
