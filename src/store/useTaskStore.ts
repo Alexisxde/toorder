@@ -10,7 +10,7 @@ export interface TaskState {
 }
 
 const supabase = createClient()
-let debounceTimeout
+let debounceTimeout: NodeJS.Timeout
 
 export const useTaskStore = create<TaskState>((set, get) => ({
 	tasks: [],
