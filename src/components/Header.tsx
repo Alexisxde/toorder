@@ -1,5 +1,5 @@
 import GitHub from "@/components/icons/GitHub"
-import SignOutButton from "@/components/ui/SignOutButton"
+import SignOutButton from "@/components/SignOutButton"
 import { createClientForServer } from "@/supabase/server"
 import { redirect } from "next/navigation"
 

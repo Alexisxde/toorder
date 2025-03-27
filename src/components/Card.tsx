@@ -1,5 +1,5 @@
 import DropIndicator from "@/components/DropIndicator"
-import EditDropDown from "@/components/ui/EditDropdown"
+import EditDropDown from "@/components/EditDropdown"
 import { month } from "@/lib/utils"
 import type { Task } from "@/types"
 import { CalendarDaysIcon } from "@heroicons/react/24/solid"

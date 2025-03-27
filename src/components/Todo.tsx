@@ -1,7 +1,7 @@
 import Column from "@/components/Column"
 import DeleteCard from "@/components/DeleteCard"
 import TaskIcon from "@/components/icons/Task.svg"
-import ButtonModalTask from "@/components/ui/ButtonModalTask"
+import ButtonSheet from "@/components/ButtonSheet"
 import type { Task } from "@/types"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
@@ -32,18 +32,18 @@ export default async function Todo({ tasks }: Props) {
 						Create a goal for one of your teams that will appear in the team
 						hub-that's how everyone will know what to work on.
 					</p>
-					<ButtonModalTask className="mt-2 flex items-center justify-center gap-1">
+					<ButtonSheet className="mt-2 flex items-center justify-center gap-1">
 						<PlusIcon width="16px" height="16px" />
 						<span>Add a task</span>
-					</ButtonModalTask>
+					</ButtonSheet>
 				</div>
 			) : (
 				<>
 					<div className="flex justify-end gap-3 px-5 py-2">
-						<ButtonModalTask className="flex items-center justify-center gap-1" variant="outline">
+						<ButtonSheet className="flex items-center justify-center gap-1" variant="outline">
 							<PlusIcon width="16px" height="16px" />
 							<span>Add a task</span>
-						</ButtonModalTask>
+						</ButtonSheet>
 					</div>
 					<main className="mx-auto flex gap-6 px-5">
 						{columns.map(({ title, column, headingColor }) => (

@@ -1,6 +1,6 @@
 import Header from "@/components/Header"
 import ProjectIcon from "@/components/icons/Project.svg"
-import ButtonModalProject from "@/components/ui/ButtonModalProject"
+import ButtonModalProject from "@/components/ButtonModalProject"
 import { createClientForServer } from "@/supabase/server"
 import {
 	ChevronRightIcon,
