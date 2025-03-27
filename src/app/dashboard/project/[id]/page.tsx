@@ -47,7 +47,9 @@ export default function Page({ params }: Props) {
 						Create a goal for one of your teams that will appear in the team
 						hub-that's how everyone will know what to work on.
 					</p>
-					<ButtonSheet className="mt-2 flex items-center justify-center gap-1">
+					<ButtonSheet
+						className="mt-2 flex items-center justify-center gap-1"
+						id={id}>
 						<PlusIcon width="16px" height="16px" />
 						<span>Add a task</span>
 					</ButtonSheet>
@@ -57,7 +59,8 @@ export default function Page({ params }: Props) {
 					<div className="flex justify-end gap-3 px-5 py-2">
 						<ButtonSheet
 							className="flex items-center justify-center gap-1"
-							variant="outline">
+							variant="outline"
+							id={id}>
 							<PlusIcon width="16px" height="16px" />
 							<span>Add a task</span>
 						</ButtonSheet>

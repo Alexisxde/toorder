@@ -7,6 +7,7 @@ export interface TaskState {
 	loading: boolean
 	getTasks: (id: string) => Promise<void>
 	updateTasks: ({ id, column }: { id: string; column: string }) => Promise<void>
+	createTask: (task: Task) => Promise<void>
 	deleteTask: (id: string) => Promise<void>
 }
 
@@ -16,6 +17,16 @@ let debounceTimeout: NodeJS.Timeout
 export const useTaskStore = create<TaskState>((set, get) => ({
 	tasks: [],
 	loading: false,
+	createTask: async (task: Task) => {
+		const tasks = get().tasks
+		try {
+		  const { data } = await supabase.from("tasks").insert(task).select()
+		  set({ tasks: [...(tasks || []), data?.[0]] })
+		} catch (error) {
+			console.error("Error updating task:", error)
+			set({ tasks })
+		}
+	},
 	getTasks: async id => {
 		set({ loading: true })
 		const { data } = await supabase.from("tasks").select().eq("project_id", id)
