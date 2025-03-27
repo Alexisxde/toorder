@@ -1,12 +1,12 @@
 "use client"
 import { createClient } from "@/supabase/client"
+import { useTaskStore } from "@/store/useTaskStore"
 import { FireIcon, TrashIcon } from "@heroicons/react/24/solid"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function DeleteCard() {
+  const deleteTask = useTaskStore(state => state.deleteTask)
 	const [active, setActive] = useState(false)
-	const router = useRouter()
 
 	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
@@ -19,10 +19,8 @@ export default function DeleteCard() {
 
 	const handleDragEnd = async (e: React.DragEvent<HTMLDivElement>) => {
 		const cardId = e.dataTransfer.getData("cardId")
-		const supabase = createClient()
-		await supabase.from("tasks").delete().eq("id", cardId)
+		deleteTask(cardId)
 		setActive(false)
-		router.refresh()
 	}
 
 	return (
