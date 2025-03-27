@@ -1,12 +1,14 @@
+import SignInButton from "@/components/SignInButton"
+import SignOutButton from "@/components/SignOutButton"
 import Nextjs from "@/components/icons/Nextjs"
 import React from "@/components/icons/React"
 import Supabase from "@/components/icons/Supabase"
 import TailWind from "@/components/icons/Tailwind"
+import Werty from "@/components/icons/werty.svg"
 import { Button } from "@/components/ui/Button"
-import SignInButton from "@/components/SignInButton"
-import SignOutButton from "@/components/SignOutButton"
 import { createClientForServer } from "@/supabase/server"
 import { ArrowRightIcon } from "@heroicons/react/16/solid"
+import Image from "next/image"
 
 export default async function HomePage() {
 	const supabase = await createClientForServer()
@@ -22,7 +24,9 @@ export default async function HomePage() {
 				<div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
 			</div>
 			<header className="flex w-full items-center justify-between px-10 py-5">
-				<div className="h-10"></div>
+				<a href="/">
+          <Image className="h-7 w-auto" src={Werty} alt="Werty Logo" />
+        </a>
 				{user ? (
 					<div className="flex items-center justify-center gap-3">
 						<a href="/dashboard">

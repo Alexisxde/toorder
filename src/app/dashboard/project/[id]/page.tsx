@@ -1,24 +1,40 @@
+"use client"
 import ButtonSheet from "@/components/ButtonSheet"
 import Column from "@/components/Column"
 import DeleteCard from "@/components/DeleteCard"
 import TaskIcon from "@/components/icons/Task.svg"
+import { BGLoading } from "@/components/ui/Loading"
 import { useTaskStore } from "@/store/useTaskStore"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
+import { use, useEffect } from "react"
+
+interface Props {
+	params: Promise<{ id: string }>
+}
 
 const COLUMNS = [
-  { title: "Nuevas", column: "new", headingColor: "text-neutral-400" },
-  { title: "TODO", column: "todo", headingColor: "text-yellow-200" },
-  { title: "En proceso", column: "process", headingColor: "text-blue-200" },
-  {
-    title: "Completadas",
-    column: "completed",
-    headingColor: "text-emerald-200"
-  }
+	{ title: "Nuevas", column: "new", headingColor: "text-neutral-400" },
+	{ title: "TODO", column: "todo", headingColor: "text-yellow-200" },
+	{ title: "En proceso", column: "process", headingColor: "text-blue-200" },
+	{
+		title: "Completadas",
+		column: "completed",
+		headingColor: "text-emerald-200"
+	}
 ] as const
 
-export default function Todo() {
+export default function Page({ params }: Props) {
+	const { id } = use(params)
+	const getTasks = useTaskStore(state => state.getTasks)
+	const loading = useTaskStore(state => state.loading)
 	const tasks = useTaskStore(state => state.tasks)
+
+	useEffect(() => {
+		getTasks(id)
+	}, [id, getTasks])
+
+	if (loading) return <BGLoading />
 	if (tasks === null) return <div>Tasks not found...</div>
 
 	return (
