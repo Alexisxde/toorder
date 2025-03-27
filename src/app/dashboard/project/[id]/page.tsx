@@ -35,7 +35,7 @@ export default function Page({ params }: Props) {
 	}, [id, getTasks])
 
 	if (loading) return <BGLoading />
-	if (tasks === null) return <div>Tasks not found...</div>
+	if (!tasks || tasks === null) return <div>Tasks not found...</div>
 
 	return (
 		<>
@@ -69,7 +69,6 @@ export default function Page({ params }: Props) {
 								title={title}
 								column={column}
 								headingColor={headingColor}
-								cards={tasks}
 							/>
 						))}
 						<DeleteCard />

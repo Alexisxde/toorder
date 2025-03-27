@@ -1,22 +1,21 @@
 "use client"
 import Card from "@/components/Card"
-import { createClient } from "@/supabase/client"
 import DropIndicator from "@/components/DropIndicator"
-import type { Task } from "@/types"
-import { redirect, useRouter } from "next/navigation"
+import { useTaskStore } from "@/store/useTaskStore"
+import { Task } from "@/types"
 import { useState } from "react"
 
 interface Props {
 	title: string
 	column: string
 	headingColor: string
-	cards: Task[]
 }
 
-export default function Column({ title, column, headingColor, cards }: Props) {
+export default function Column({ title, column, headingColor }: Props) {
+	const tasks = useTaskStore(state => state.tasks)
+	const updateTasks = useTaskStore(state => state.updateTasks)
+	const cardFilter = tasks?.filter(c => c.column === column)
 	const [active, setActive] = useState(false)
-  const router = useRouter()
-	const cardFilter = cards.filter(c => c.column === column)
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const handleDragStart = (e: any, card: Task) => {
@@ -84,9 +83,7 @@ export default function Column({ title, column, headingColor, cards }: Props) {
 		const before = element.dataset.before || "-1"
 
 		if (before !== cardId) {
-      const supabase = createClient()
-      await supabase.from("tasks").update({ column }).eq("id", cardId)
-      router.refresh()
+			updateTasks({ id: cardId, column })
 		}
 	}
 
@@ -95,7 +92,7 @@ export default function Column({ title, column, headingColor, cards }: Props) {
 			<div className="mb-2 flex items-center justify-between">
 				<h3 className={`font-medium ${headingColor}`}>{title}</h3>
 				<span className="rounded text-sm text-neutral-400">
-					{cardFilter.length}
+					{cardFilter?.length}
 				</span>
 			</div>
 			<div
@@ -103,7 +100,7 @@ export default function Column({ title, column, headingColor, cards }: Props) {
 				onDragOver={handleDragOver}
 				onDragLeave={handleDragLeave}
 				className={`h-full w-full transition-colors ${active ? "bg-neutral-800/50" : "bg-slate-800/0"}`}>
-				{cardFilter.map(c => (
+				{cardFilter?.map(c => (
 					<Card key={c.id} task={c} handleDragStart={handleDragStart} />
 				))}
 				<DropIndicator beforeId="-1" column={column} />
