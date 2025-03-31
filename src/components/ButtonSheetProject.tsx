@@ -5,6 +5,7 @@ import { createClient } from "@/supabase/client"
 import {
 	ChatBubbleBottomCenterTextIcon,
 	ExclamationCircleIcon,
+	PlusIcon,
 	RectangleStackIcon
 } from "@heroicons/react/24/outline"
 import Image from "next/image"
@@ -14,8 +15,7 @@ import { createPortal } from "react-dom"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 interface Props {
-	children: React.ReactNode
-	className?: string
+	delay: number
 }
 
 interface FormData {
@@ -23,7 +23,7 @@ interface FormData {
 	description: string
 }
 
-export default function ButtonModalProject({ children, className }: Props) {
+export default function ButtonSheetProject({ delay }: Props) {
 	const [openModal, setOpenModal] = useState(false)
 	const router = useRouter()
 	const {
@@ -124,9 +124,12 @@ export default function ButtonModalProject({ children, className }: Props) {
 	return (
 		<>
 			{openModal && <>{createPortal(<Modal />, document.body)}</>}
-			<Button className={className} onClick={handleModal}>
-				{children}
-			</Button>
+			<button
+				className="animate-fade-in group relative flex cursor-pointer items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 p-5 transition-colors duration-150 ease-in-out hover:border-neutral-700 hover:bg-neutral-800"
+				onClick={handleModal}
+				style={{ animationDelay: `calc(0.1s * ${delay}` }}>
+				<PlusIcon width={48} height={48} />
+			</button>
 		</>
 	)
 }
