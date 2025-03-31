@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export default async function Header() {
 	return (
-		<header className="sticky top-0 z-[99px] flex h-12 max-h-12 min-h-12 items-center justify-between border-b-[0.25px] border-neutral-800 bg-neutral-900 px-5">
+		<header className="sticky top-0 z-[99px] flex h-12 max-h-12 min-h-12 items-center justify-between border-b-[0.25px] border-neutral-800 bg-neutral-900 px-6">
 			<a href="/">
 				<Image className="h-5 w-auto" src={Werty} alt="Werty Logo" />
 			</a>
