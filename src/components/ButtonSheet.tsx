@@ -1,10 +1,7 @@
 "use client"
 import { Button, type ButtonVariants } from "@/components/ui/Button"
-import { useState } from "react"
-import { createPortal } from "react-dom"
 import { Input } from "@/components/ui/Input"
 import { Label } from "@/components/ui/Label"
-import { Loading } from "@/components/ui/Loading"
 import Sheet from "@/components/ui/Sheet"
 import { formSchemaTask } from "@/lib/schema"
 import { cn } from "@/lib/utils"
@@ -12,6 +9,8 @@ import { useTaskStore } from "@/store/useTaskStore"
 import { Task } from "@/types"
 import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { memo, useState } from "react"
+import { createPortal } from "react-dom"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -22,7 +21,7 @@ interface Props {
 	id: string
 }
 
-export default function ButtonSheet({
+function ButtonSheet({
 	children,
 	className,
 	variant,
@@ -88,7 +87,7 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 			project_id: id
 		} as Task
 		createTask(task)
-    handleSheet()
+		handleSheet()
 	}
 
 	return (
@@ -210,3 +209,5 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 		</Sheet>
 	)
 }
+
+export default memo(ButtonSheet)
