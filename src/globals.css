@@ -29,7 +29,6 @@
 
 	* {
 		-webkit-tap-highlight-color: transparent;
-		scrollbar-gutter: stable;
 		scrollbar-color: var(--scrollbar-color) transparent;
 		scrollbar-width: thin;
 	}
