@@ -25,7 +25,7 @@ export default async function DashboardPage() {
 	if (!projects) return
 
 	return (
-		<section className="flex flex-1 flex-col p-6">
+		<section className="flex flex-col p-6">
       <h2 className="mb-2">
         {user?.user_metadata.preferred_username}'s Org
       </h2>
@@ -37,10 +37,10 @@ export default async function DashboardPage() {
             href={`/dashboard/project/${id}`}
             style={{ animationDelay: `calc(0.1s * ${i + 1}` }}>
             <div className="flex w-full flex-col">
-                <h3 className="flex-shrink pr-4 text-sm mb-1">{name}</h3>
-                <p className="text-xs text-neutral-400">
-                  {description}
-                </p>
+              <h3 className="flex-shrink pr-4 text-sm mb-1">{name}</h3>
+              <p className="text-xs text-neutral-400">
+                {description}
+              </p>
             </div>
             <div className="absolute top-4 right-4 text-neutral-100 transition-all duration-200 group-hover:right-3">
               <ChevronRightIcon width={24} height={24} />

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button"
 import { createClientForServer } from "@/supabase/server"
 import { ArrowRightIcon } from "@heroicons/react/16/solid"
 import Image from "next/image"
+import type { User } from "@/types"
 
 export default async function HomePage() {
 	const supabase = await createClientForServer()
@@ -32,7 +33,7 @@ export default async function HomePage() {
 						<a href="/dashboard">
 							<Button>Dashboard</Button>
 						</a>
-						<SignOutButton>Cerrar sesión</SignOutButton>
+						<SignOutButton user={user?.user_metadata as User} />
 					</div>
 				) : (
 					<SignInButton />
