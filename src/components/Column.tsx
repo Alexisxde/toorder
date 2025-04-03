@@ -3,15 +3,24 @@ import Card from "@/components/Card"
 import DropIndicator from "@/components/DropIndicator"
 import { useTaskStore } from "@/store/useTaskStore"
 import { Task } from "@/types"
-import { useState } from "react"
+import { JSX, useState } from "react"
+import { PlusIcon, PencilSquareIcon, ArrowPathIcon, CheckCircleIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/outline"
 
 interface Props {
 	title: string
 	column: string
-	headingColor: string
+	textColor: string
+	bgColor: string
 }
 
-export default function Column({ title, column, headingColor }: Props) {
+const COLUMNSICONS: Record<string, JSX.Element> = {
+  new: <ClipboardDocumentListIcon width="14px" height="14px" />,
+  todo: <PencilSquareIcon width="14px" height="14px" />,
+  process: <ArrowPathIcon width="14px" height="14px" />,
+  completed: <CheckCircleIcon width="14px" height="14px" />
+} as const
+
+export default function Column({ title, column, textColor, bgColor }: Props) {
 	const tasks = useTaskStore(state => state.tasks)
 	const updateTasks = useTaskStore(state => state.updateTasks)
 	const cardFilter = tasks?.filter(c => c.column === column)
@@ -89,11 +98,14 @@ export default function Column({ title, column, headingColor }: Props) {
 
 	return (
 		<section className="w-full min-w-56">
-			<div className="mb-2 flex items-center justify-between">
-				<h3 className={`font-medium ${headingColor}`}>{title}</h3>
-				<span className="rounded text-sm text-neutral-400">
+			<div className="mb-2 flex items-center justify-between rounded-md border border-neutral-800 bg-neutral-900 py-1 px-2 sticky top-13 z-50">
+        <div className="inline-flex items-center gap-2 text-md">
+				  <h3>{title}</h3>
+        </div>
+				<div className={`inline-flex items-center gap-1 rounded-lg text-xs py-0.5 px-1.5 ${textColor} ${bgColor}`}>
+          {COLUMNSICONS[column]}
 					{cardFilter?.length}
-				</span>
+        </div>
 			</div>
 			<div
 				onDrop={handleDragEnd}
@@ -104,7 +116,6 @@ export default function Column({ title, column, headingColor }: Props) {
 					<Card key={c.id} task={c} handleDragStart={handleDragStart} />
 				))}
 				<DropIndicator beforeId="-1" column={column} />
-				{/* <AddCard column={column} /> */}
 			</div>
 		</section>
 	)

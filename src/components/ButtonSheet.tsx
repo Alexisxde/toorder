@@ -9,6 +9,7 @@ import { useTaskStore } from "@/store/useTaskStore"
 import { Task } from "@/types"
 import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { motion } from "framer-motion"
 import { memo, useState } from "react"
 import { createPortal } from "react-dom"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -109,7 +110,12 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 						{...register("title")}
 					/>
 					{errors?.title && (
-						<p className="text-xs text-red-600">{errors?.title.message}</p>
+						<motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-xs text-red-600">
+              {errors?.title.message}  
+            </motion.p>
 					)}
 				</div>
 				<div className="grid items-center gap-1.5">
@@ -144,7 +150,12 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 						</option>
 					</select>
 					{errors?.badge && (
-						<p className="text-xs text-red-600">{errors?.badge.message}</p>
+						<motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xs text-red-600">
+              {errors?.badge.message}
+            </motion.p>
 					)}
 				</div>
 				<div className="grid w-full max-w-sm items-center gap-1.5">
@@ -183,9 +194,12 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 							onChange={e => setImage(e.target.files?.[0] as File)}
 						/>
 						{errors?.image && (
-							<p className="text-xs text-red-600">
+							<motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-xs text-red-600">
 								{errors?.image.message as string}
-							</p>
+							</motion.p>
 						)}
 					</div>
 					<div className="overflow-hidden text-center text-[10px] before:relative before:right-2 before:inline-block before:h-[1px] before:w-1/4 before:bg-neutral-800 before:align-middle after:relative after:left-2 after:inline-block after:h-[1px] after:w-1/4 after:bg-neutral-800 after:align-middle">
