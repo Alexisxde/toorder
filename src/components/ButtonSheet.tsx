@@ -22,12 +22,7 @@ interface Props {
 	id: string
 }
 
-function ButtonSheet({
-	children,
-	className,
-	variant,
-	id
-}: Props) {
+function ButtonSheet({ children, className, variant, id }: Props) {
 	const [open, setOpen] = useState(false)
 
 	const handleSheet = () => {
@@ -92,135 +87,137 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 	}
 
 	return (
-		<Sheet title="Create task" handleSheet={handleSheet}>
-			<form
-				className="grid gap-2"
-				autoComplete="nope"
-				onSubmit={handleSubmit(onSubmit)}
-				encType="multipart/form-data">
-				<div className="grid w-full max-w-sm items-center gap-1.5">
-					<Label required htmlFor="title">
-						Title task
-					</Label>
-					<Input
-						id="title"
-						type="text"
-						className={errors?.title && "border-red-500"}
-						placeholder="example task"
-						{...register("title")}
-					/>
-					{errors?.title && (
-						<motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-xs text-red-600">
-              {errors?.title.message}  
-            </motion.p>
-					)}
-				</div>
-				<div className="grid items-center gap-1.5">
-					<Label required htmlFor="badge">
-						Badge
-					</Label>
-					<select
-						id="badge"
-						className={cn(
-							"focus-active:border-neutral-700 flex rounded-md border border-neutral-800 bg-transparent px-3 py-1 text-base shadow-sm transition-colors hover:border-neutral-700 focus:border-neutral-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-							errors?.badge && "border-red-500"
-						)}
-						{...register("badge")}>
-						<option className="bg-neutral-800 text-neutral-500" value="">
-							Select to badge
-						</option>
-						<option className="bg-neutral-800 text-neutral-100" value="design">
-							Design
-						</option>
-						<option
-							className="bg-neutral-800 text-neutral-100"
-							value="development">
-							Development
-						</option>
-						<option
-							className="bg-neutral-800 text-neutral-100"
-							value="planning">
-							Planning
-						</option>
-						<option className="bg-neutral-800 text-neutral-100" value="study">
-							Study
-						</option>
-					</select>
-					{errors?.badge && (
-						<motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-xs text-red-600">
-              {errors?.badge.message}
-            </motion.p>
-					)}
-				</div>
-				<div className="grid w-full max-w-sm items-center gap-1.5">
-					<Label htmlFor="description">Description task</Label>
-					<textarea
-						id="description"
-						className="focus-active:border-neutral-700 flex w-full flex-1 resize-none rounded-md border border-neutral-800 bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-sm placeholder:text-neutral-500 hover:border-neutral-700 focus:border-neutral-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-						{...register("description")}
-						rows={3}
-					/>
-				</div>
-				<div className="grid w-full max-w-sm items-center gap-1.5">
-					<Label>Image</Label>
+			<Sheet title="Create task" handleSheet={handleSheet}>
+				<form
+					className="grid gap-2"
+					autoComplete="nope"
+					onSubmit={handleSubmit(onSubmit)}
+					encType="multipart/form-data">
 					<div className="grid w-full max-w-sm items-center gap-1.5">
-						{image ? (
-							<div className="relative">
-								<Button
-									variant="icon"
-									className="absolute top-0 right-0 rounded-full bg-white p-1 text-neutral-500"
-									onClick={() => setImage(null)}>
-									<XMarkIcon className="size-4" />
-								</Button>
-								<img src={URL.createObjectURL(image)} className="h-32" />
-							</div>
-						) : (
-							<div className="flex h-32 cursor-not-allowed items-center justify-center border border-neutral-800 bg-neutral-900 opacity-50">
-								<PhotoIcon className="size-10" />
-							</div>
-						)}
+						<Label required htmlFor="title">
+							Title task
+						</Label>
 						<Input
-							type="file"
-							disabled
-							className={errors?.image && "border-red-500"}
-							accept=".jpg, .jpeg, .png"
-							{...register("image")}
-							onChange={e => setImage(e.target.files?.[0] as File)}
+							id="title"
+							type="text"
+							className={errors?.title && "border-red-500"}
+							placeholder="example task"
+							{...register("title")}
 						/>
-						{errors?.image && (
-							<motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-xs text-red-600">
-								{errors?.image.message as string}
+						{errors?.title && (
+							<motion.p
+								initial={{ opacity: 0, y: 10 }}
+								animate={{ opacity: 1, y: 0 }}
+								className="text-xs text-red-600">
+								{errors?.title.message}
 							</motion.p>
 						)}
 					</div>
-					<div className="overflow-hidden text-center text-[10px] before:relative before:right-2 before:inline-block before:h-[1px] before:w-1/4 before:bg-neutral-800 before:align-middle after:relative after:left-2 after:inline-block after:h-[1px] after:w-1/4 after:bg-neutral-800 after:align-middle">
-						or
+					<div className="grid items-center gap-1.5">
+						<Label required htmlFor="badge">
+							Badge
+						</Label>
+						<select
+							id="badge"
+							className={cn(
+								"focus-active:border-neutral-700 flex rounded-md border border-neutral-800 bg-transparent px-3 py-1 text-base shadow-sm transition-colors hover:border-neutral-700 focus:border-neutral-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+								errors?.badge && "border-red-500"
+							)}
+							{...register("badge")}>
+							<option className="bg-neutral-800 text-neutral-500" value="">
+								Select to badge
+							</option>
+							<option
+								className="bg-neutral-800 text-neutral-100"
+								value="design">
+								Design
+							</option>
+							<option
+								className="bg-neutral-800 text-neutral-100"
+								value="development">
+								Development
+							</option>
+							<option
+								className="bg-neutral-800 text-neutral-100"
+								value="planning">
+								Planning
+							</option>
+							<option className="bg-neutral-800 text-neutral-100" value="study">
+								Study
+							</option>
+						</select>
+						{errors?.badge && (
+							<motion.p
+								initial={{ opacity: 0, y: 10 }}
+								animate={{ opacity: 1, y: 0 }}
+								className="text-xs text-red-600">
+								{errors?.badge.message}
+							</motion.p>
+						)}
 					</div>
-					<Input
-						disabled={image ? true : false}
-						className={errors?.image_url && "border-red-500"}
-						type="text"
-						placeholder="https://exampleimg.com"
-						{...register("image_url")}
-					/>
-					{errors?.image_url && (
-						<p className="text-xs text-red-600">
-							{errors?.image_url.message as string}
-						</p>
-					)}
-				</div>
-				<Button className="mt-2">Create task</Button>
-			</form>
-		</Sheet>
+					<div className="grid w-full max-w-sm items-center gap-1.5">
+						<Label htmlFor="description">Description task</Label>
+						<textarea
+							id="description"
+							className="focus-active:border-neutral-700 flex w-full flex-1 resize-none rounded-md border border-neutral-800 bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-sm placeholder:text-neutral-500 hover:border-neutral-700 focus:border-neutral-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+							{...register("description")}
+							rows={3}
+						/>
+					</div>
+					<div className="grid w-full max-w-sm items-center gap-1.5">
+						<Label>Image</Label>
+						<div className="grid w-full max-w-sm items-center gap-1.5">
+							{image ? (
+								<div className="relative">
+									<Button
+										variant="icon"
+										className="absolute top-0 right-0 rounded-full bg-white p-1 text-neutral-500"
+										onClick={() => setImage(null)}>
+										<XMarkIcon className="size-4" />
+									</Button>
+									<img src={URL.createObjectURL(image)} className="h-32" />
+								</div>
+							) : (
+								<div className="flex h-32 cursor-not-allowed items-center justify-center border border-neutral-800 bg-neutral-900 opacity-50">
+									<PhotoIcon className="size-10" />
+								</div>
+							)}
+							<Input
+								type="file"
+								disabled
+								className={errors?.image && "border-red-500"}
+								accept=".jpg, .jpeg, .png"
+								{...register("image")}
+								onChange={e => setImage(e.target.files?.[0] as File)}
+							/>
+							{errors?.image && (
+								<motion.p
+									initial={{ opacity: 0, y: 10 }}
+									animate={{ opacity: 1, y: 0 }}
+									className="text-xs text-red-600">
+									{errors?.image.message as string}
+								</motion.p>
+							)}
+						</div>
+						<div className="overflow-hidden text-center text-[10px] before:relative before:right-2 before:inline-block before:h-[1px] before:w-1/4 before:bg-neutral-800 before:align-middle after:relative after:left-2 after:inline-block after:h-[1px] after:w-1/4 after:bg-neutral-800 after:align-middle">
+							or
+						</div>
+						<Input
+							disabled={image ? true : false}
+							className={errors?.image_url && "border-red-500"}
+							type="text"
+							placeholder="https://exampleimg.com"
+							{...register("image_url")}
+						/>
+						{errors?.image_url && (
+							<p className="text-xs text-red-600">
+								{errors?.image_url.message as string}
+							</p>
+						)}
+					</div>
+					<Button className="mt-2">Create task</Button>
+				</form>
+			</Sheet>
 	)
 }
 
