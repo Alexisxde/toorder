@@ -20,8 +20,8 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 	createTask: async (task: Task) => {
 		const tasks = get().tasks
 		try {
-		  const { data } = await supabase.from("tasks").insert(task).select()
-		  set({ tasks: [...(tasks || []), data?.[0]] })
+			const { data } = await supabase.from("tasks").insert(task).select()
+			set({ tasks: [...(tasks || []), data?.[0]] })
 		} catch (error) {
 			console.error("Error updating task:", error)
 			set({ tasks })

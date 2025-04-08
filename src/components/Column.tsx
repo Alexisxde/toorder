@@ -3,8 +3,13 @@ import Card from "@/components/Card"
 import DropIndicator from "@/components/DropIndicator"
 import { useTaskStore } from "@/store/useTaskStore"
 import { Task } from "@/types"
+import {
+	ArrowPathIcon,
+	CheckCircleIcon,
+	ClipboardDocumentListIcon,
+	PencilSquareIcon
+} from "@heroicons/react/24/outline"
 import { JSX, useState } from "react"
-import { PlusIcon, PencilSquareIcon, ArrowPathIcon, CheckCircleIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/outline"
 
 interface Props {
 	title: string
@@ -14,10 +19,10 @@ interface Props {
 }
 
 const COLUMNSICONS: Record<string, JSX.Element> = {
-  new: <ClipboardDocumentListIcon width="14px" height="14px" />,
-  todo: <PencilSquareIcon width="14px" height="14px" />,
-  process: <ArrowPathIcon width="14px" height="14px" />,
-  completed: <CheckCircleIcon width="14px" height="14px" />
+	new: <ClipboardDocumentListIcon width="14px" height="14px" />,
+	todo: <PencilSquareIcon width="14px" height="14px" />,
+	process: <ArrowPathIcon width="14px" height="14px" />,
+	completed: <CheckCircleIcon width="14px" height="14px" />
 } as const
 
 export default function Column({ title, column, textColor, bgColor }: Props) {
@@ -97,15 +102,16 @@ export default function Column({ title, column, textColor, bgColor }: Props) {
 	}
 
 	return (
-		<section className="w-full min-w-56">
-			<div className="mb-2 flex items-center justify-between rounded-md border border-neutral-800 bg-neutral-900 py-1 px-2 sticky top-13 z-50">
-        <div className="inline-flex items-center gap-2 text-md">
-				  <h3>{title}</h3>
-        </div>
-				<div className={`inline-flex items-center gap-1 rounded-lg text-xs py-0.5 px-1.5 ${textColor} ${bgColor}`}>
-          {COLUMNSICONS[column]}
+		<section className="w-full flex-1">
+			<div className="sticky top-13 z-50 mb-2 flex items-center justify-between rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1">
+				<div className="text-md inline-flex items-center gap-2">
+					<h3>{title}</h3>
+				</div>
+				<div
+					className={`inline-flex items-center gap-1 rounded-lg px-1.5 py-0.5 text-xs ${textColor} ${bgColor}`}>
+					{COLUMNSICONS[column]}
 					{cardFilter?.length}
-        </div>
+				</div>
 			</div>
 			<div
 				onDrop={handleDragEnd}

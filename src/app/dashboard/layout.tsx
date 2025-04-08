@@ -1,5 +1,7 @@
 import Header from "@/components/Header"
+import Sidebar from "@/components/Sidebar"
 import { createClientForServer } from "@/supabase/server"
+import { User } from "@/types"
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 
@@ -10,16 +12,19 @@ interface Props {
 }
 
 export default async function HeaderLayout({ children }: Props) {
-  const supabase = await createClientForServer()
+	const supabase = await createClientForServer()
 	const {
 		data: { user }
 	} = await supabase.auth.getUser()
 	if (!user) redirect("/")
 
 	return (
-		<>
-			<Header />
-			<main>{children}</main>
-		</>
+		<section className="flex overflow-hidden">
+			<Sidebar user={user?.user_metadata as User} />
+			<div className="w-full">
+				<Header user={user?.user_metadata as User} />
+				<main>{children}</main>
+			</div>
+		</section>
 	)
 }

@@ -125,7 +125,7 @@ export default function ButtonSheetProject({ delay }: Props) {
 		<>
 			{openModal && <>{createPortal(<Modal />, document.body)}</>}
 			<button
-				className="animate-fade-in group relative flex cursor-pointer items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 p-5 transition-colors duration-150 ease-in-out hover:border-neutral-700 hover:bg-neutral-800"
+				className="animate-fade-in flex cursor-pointer items-center justify-center rounded-md border border-neutral-200 bg-neutral-100 p-5 transition-colors duration-150 ease-in-out hover:border-neutral-300 hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800"
 				onClick={handleModal}
 				style={{ animationDelay: `calc(0.1s * ${delay}` }}>
 				<PlusIcon width={48} height={48} />
