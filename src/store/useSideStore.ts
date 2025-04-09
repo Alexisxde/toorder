@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-export interface SideState {
+interface SideState {
 	isOpen: boolean
 	setIsOpen: () => void
 }

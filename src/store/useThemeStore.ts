@@ -8,13 +8,10 @@ interface ThemeState {
 
 export const useThemeStore = create<ThemeState>()(
 	persist(
-		set => ({
+		(set, get) => ({
 			theme: "dark",
 			setTheme: theme => {
-				if (typeof document !== "undefined") {
-					document.documentElement.classList.toggle("dark", theme === "dark")
-					set({ theme })
-				}
+        set({ theme })
 			}
 		}),
 		{ name: "theme" }

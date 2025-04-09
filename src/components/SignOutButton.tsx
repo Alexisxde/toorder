@@ -8,6 +8,7 @@ import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
+import { applyTheme } from "@/lib/utils"
 
 interface Props {
 	user: User | null
@@ -31,6 +32,10 @@ export default function SignOutButton({ user }: Props) {
 			console.error(error) // eslint-disable-line no-console
 		}
 	}
+
+  useEffect(() => {
+    applyTheme(theme)
+  }, [theme])
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -88,11 +93,11 @@ export default function SignOutButton({ user }: Props) {
 				initial={wrapperVariants.closed}
 				variants={wrapperVariants}
 				style={{ originY: "bottom" }}
-				className="absolute top-[-205px] left-[20px] flex flex-col gap-2 overflow-hidden rounded-md border border-neutral-200 bg-neutral-100 p-2 text-[11px] dark:border-neutral-800 dark:bg-neutral-900">
+				className="absolute top-[-205px] left-[20px] z-50 flex flex-col gap-2 overflow-hidden rounded-md border border-neutral-200 bg-neutral-100 p-2 text-[11px] dark:border-neutral-800 dark:bg-neutral-900">
 				<div className="flex flex-col border-b-[0.25px] border-neutral-200 p-1 dark:border-neutral-800">
-					<span className="text-xs">Alexisxde</span>
+					<span className="text-xs">{user?.user_name}</span>
 					<span className="mb-1 text-[11px] text-neutral-600 dark:text-neutral-400">
-						olivarezalexis749@gmail.com
+            {user?.email}
 					</span>
 				</div>
 				<div className="flex flex-col border-b-[0.25px] border-neutral-200 dark:border-neutral-800">

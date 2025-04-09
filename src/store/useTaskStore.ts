@@ -2,7 +2,7 @@ import { createClient } from "@/supabase/client"
 import type { Task } from "@/types"
 import { create } from "zustand"
 
-export interface TaskState {
+interface TaskState {
 	tasks: Task[] | null
 	loading: boolean
 	getTasks: (id: string) => Promise<void>

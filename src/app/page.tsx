@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button"
 import { createClientForServer } from "@/supabase/server"
 import { ArrowRightIcon } from "@heroicons/react/16/solid"
 import Image from "next/image"
+import Link from "next/link"
 import type { User } from "@/types"
 
 export default async function HomePage() {
@@ -25,22 +26,21 @@ export default async function HomePage() {
 				<div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
 			</div>
 			<header className="flex w-full items-center justify-between px-10 py-5">
-				<a href="/">
+				<Link href="/">
           <Image className="h-7 w-auto" src={Werty} alt="Werty Logo" />
-        </a>
+        </Link>
 				{user ? (
 					<div className="flex items-center justify-center gap-3">
-						<a href="/dashboard">
+						<Link href="/dashboard">
 							<Button>Dashboard</Button>
-						</a>
-						<SignOutButton user={user?.user_metadata as User} />
+						</Link>
 					</div>
 				) : (
 					<SignInButton />
 				)}
 			</header>
 			<div className="relative mx-auto flex w-full max-w-4xl flex-col items-center p-10">
-				<a
+				<Link
 					href="https://github.com/Alexisxde/tarea-plus"
 					target="_blank"
 					rel="noopener noreferrer"
@@ -54,7 +54,7 @@ export default async function HomePage() {
 							</span>
 						</div>
 					</span>
-				</a>
+				</Link>
 				<h2 className="text-center text-4xl font-medium text-gray-50 sm:text-6xl">
 					Manage your tasks
 					<span className="inline-flex bg-gradient-to-r from-neutral-100 via-slate-400 to-neutral-400 bg-[200%_auto] bg-clip-text leading-tight text-transparent">

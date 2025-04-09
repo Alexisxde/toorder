@@ -11,6 +11,9 @@ import {
 import { motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { memo } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import Werty from "@/components/icons/werty.svg"
 
 interface Props {
 	className?: string
@@ -30,7 +33,9 @@ function Sidebar({ className, user }: Props) {
 			)}
 			style={{ width: isOpen ? "200px" : "fit-content" }}>
 			<div className="mb-3 border-b-[0.25px] border-neutral-200 pb-3 dark:border-neutral-800">
-				<Logo />
+        <Link href="/" className="grid size-10 shrink-0 place-content-center rounded-md bg-green-600">
+          <Image className="size-5 w-auto" src={Werty} alt="Werty Logo" />
+        </Link>
 			</div>
 			<div className="flex-1 space-y-1">
 				<Option
