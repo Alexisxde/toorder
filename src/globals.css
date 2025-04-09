@@ -5,6 +5,7 @@
 @theme {
 	--container-8xl: 1356px;
 	--animate-fade-in: fade-in 500ms forwards;
+	--animate-rippling: rippling 500ms ease-out;
 
 	@keyframes fade-in {
 		0% {
@@ -24,11 +25,11 @@
 
 @layer utilities {
 	:root {
-		--scrollbar-color: rgba(255, 255, 255, 0.3);
+		--scrollbar-color: rgba(0, 0, 0, 0.3);
 	}
 
 	.dark {
-		--scrollbar-color: rgba(0, 0, 0, 0.3);
+		--scrollbar-color: rgba(255, 255, 255, 0.3);
 	}
 
 	* {
