@@ -1,66 +1,33 @@
 "use client"
-import { Button, type ButtonProps } from "@/components/ui/button"
+import { Sheet } from "@/components/ui/Sheet"
+import { Button } from "@/components/ui/button"
+import Error from "@/components/ui/error"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { formSchemaTask } from "@/lib/schema"
-import { cn } from "@/lib/utils"
+import { useProjectStore } from "@/store/useProjectStore"
 import { useTaskStore } from "@/store/useTaskStore"
-import { Task } from "@/types"
-import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { motion } from "framer-motion"
-import { memo, useState } from "react"
-import { createPortal } from "react-dom"
+import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
+import { PhotoIcon } from "@heroicons/react/24/outline"
+import { cn } from "@/lib/utils"
 
 interface Props {
-	children: React.ReactNode
-	className?: string
-	variant?: ButtonProps["variant"]
 	id: string
-}
-
-function ButtonSheet({ children, className, variant, id }: Props) {
-	const [open, setOpen] = useState(false)
-
-	const handleSheet = () => {
-		const body = document.body
-		if (body.classList.contains("overflow-hidden")) {
-			body.classList.remove("overflow-hidden")
-		} else {
-			body.classList.add("overflow-hidden")
-		}
-		setOpen(!open)
-	}
-
-	return (
-		<>
-			{open &&
-				createPortal(
-					<SheetTask handleSheet={handleSheet} id={id} />,
-					document.body
-				)}
-			<Button className={className} onClick={handleSheet} variant={variant}>
-				{children}
-			</Button>
-		</>
-	)
-}
-
-interface SheetTaskProps {
-	id: string
-	handleSheet: () => void
 }
 
 type FormData = z.infer<typeof formSchemaTask>
 
-function SheetTask({ id, handleSheet }: SheetTaskProps) {
+export const SheetTask = ({ id }: Props) => {
+  const [open, setOpen] = useState(false)
 	const createTask = useTaskStore(state => state.createTask)
 	const [image, setImage] = useState<File | null>(null)
 	const {
 		register,
 		handleSubmit,
+    reset,
 		formState: { errors }
 	} = useForm<FormData>({ resolver: zodResolver(formSchemaTask) })
 
@@ -81,14 +48,15 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 			img_url: image_url,
 			project_id: id
 		} as Task
+    reset()
 		createTask(task)
-		handleSheet()
+		setOpen(false)
 	}
 
 	return (
-		<Sheet title="Create task" handleSheet={handleSheet}>
+		<Sheet title="Create task" open={open} setOpen={setOpen}>
 			<form
-				className="grid gap-2"
+				className="grid gap-2 px-6"
 				autoComplete="nope"
 				onSubmit={handleSubmit(onSubmit)}
 				encType="multipart/form-data">
@@ -103,16 +71,9 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 						placeholder="example task"
 						{...register("title")}
 					/>
-					{errors?.title && (
-						<motion.p
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							className="text-xs text-red-600">
-							{errors?.title.message}
-						</motion.p>
-					)}
+					{errors?.title && <Error message={errors?.title.message} />}
 				</div>
-				<div className="grid items-center gap-1.5">
+				<div className="grid w-full max-w-sm items-center gap-1.5">
 					<Label required htmlFor="badge">
 						Badge
 					</Label>
@@ -143,14 +104,7 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 							Study
 						</option>
 					</select>
-					{errors?.badge && (
-						<motion.p
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							className="text-xs text-red-600">
-							{errors?.badge.message}
-						</motion.p>
-					)}
+          {errors?.badge && <Error message={errors?.badge.message} />}
 				</div>
 				<div className="grid w-full max-w-sm items-center gap-1.5">
 					<Label htmlFor="description">Description task</Label>
@@ -188,14 +142,7 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 							{...register("image")}
 							onChange={e => setImage(e.target.files?.[0] as File)}
 						/>
-						{errors?.image && (
-							<motion.p
-								initial={{ opacity: 0, y: 10 }}
-								animate={{ opacity: 1, y: 0 }}
-								className="text-xs text-red-600">
-								{errors?.image.message as string}
-							</motion.p>
-						)}
+            {errors?.image && <Error message={errors?.image.message} />}
 					</div>
 					<div className="overflow-hidden text-center text-[10px] before:relative before:right-2 before:inline-block before:h-[1px] before:w-1/4 before:bg-neutral-800 before:align-middle after:relative after:left-2 after:inline-block after:h-[1px] after:w-1/4 after:bg-neutral-800 after:align-middle">
 						or
@@ -207,50 +154,10 @@ function SheetTask({ id, handleSheet }: SheetTaskProps) {
 						placeholder="https://exampleimg.com"
 						{...register("image_url")}
 					/>
-					{errors?.image_url && (
-						<p className="text-xs text-red-600">
-							{errors?.image_url.message as string}
-						</p>
-					)}
+					{errors?.image_url && <Error message={errors?.image_url.message} />}
 				</div>
-				<Button className="mt-2">Create task</Button>
+				<Button variant="outline" rippleColor="#202724" className="mt-2 max-w-sm" size="sm">Create task</Button>
 			</form>
 		</Sheet>
 	)
 }
-
-interface Props2 {
-	children: React.ReactNode
-	handleSheet: () => void
-	title: string
-}
-
-function Sheet({ children, handleSheet, title }: Props2) {
-	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0, transition: { delay: 0.2 } }}
-			transition={{ duration: 0.3 }}
-			className="fixed inset-0 z-50 flex justify-end bg-neutral-800/10 backdrop-blur-xs"
-			onClick={handleSheet}>
-			<motion.div
-				initial={{ x: "100%" }}
-				animate={{ x: 0 }}
-				exit={{ x: "-100%" }}
-				transition={{ duration: 0.3 }}
-				className="mr-2 flex h-auto w-sm max-w-md flex-col gap-4 overflow-auto border border-neutral-800 bg-neutral-900 p-5"
-				onClick={e => e.stopPropagation()}>
-				<div className="flex items-center justify-between">
-					<h3 className="text-lg font-medium">{title}</h3>
-					<Button variant="outline" rippleColor="#292724" onClick={handleSheet}>
-						<XMarkIcon className="size-6" />
-					</Button>
-				</div>
-				{children}
-			</motion.div>
-		</motion.div>
-	)
-}
-
-export default memo(ButtonSheet)

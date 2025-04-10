@@ -13,11 +13,11 @@ const buttonVariants = cva(
 					"bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100",
 				outline:
 					"border border-neutral-200 bg-neutral-100 transition-colors duration-150 ease-in-out hover:border-neutral-300 hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800",
-				ghost: "bg-transparent text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800",
+				ghost:
+					"bg-transparent text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800",
 				link: "bg-transparent text-neutral-900 dark:text-neutral-100 underline-offset-4 hover:underline",
 				destructive:
-					"bg-red-500 text-neutral-100 dark:bg-red-900 dark:text-neutral-100",
-				disabled: "cursor-not-allowed opacity-50"
+					"border transition-colors duration-150 ease-in-out text-red-700 border-red-500 bg-red-200 hover:border-red-400 hover:bg-red-300 dark:text-red-600 dark:border-red-800 dark:bg-red-900 dark:hover:border-red-700 dark:hover:bg-red-800"
 			},
 			size: {
 				default: "px-2 py-1 text-xs",
@@ -25,17 +25,18 @@ const buttonVariants = cva(
 				md: "px-5 py-2.5 text-xs",
 				lg: "px-6 py-3 text-base"
 			},
+			disabled: { true: "cursor-not-allowed opacity-50" }
 		},
 		defaultVariants: { variant: "default", size: "default" }
 	}
 )
 
-interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+export interface ButtonProps
+	extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "disabled">,
 		VariantProps<typeof buttonVariants> {
-      rippleColor?: string
-      duration?: string
-    }
+	rippleColor?: string
+	duration?: string
+}
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	(
@@ -43,10 +44,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			className,
 			children,
 			rippleColor = "#ffffff",
-			duration = "150ms",
+			duration = "600ms",
 			onClick,
 			variant,
 			size,
+			disabled,
 			...props
 		},
 		ref
@@ -85,7 +87,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 		return (
 			<button
-				className={cn(buttonVariants({ variant, size }), className)}
+				className={cn(buttonVariants({ variant, size, disabled }), className)}
 				onClick={handleClick}
 				ref={ref}
 				{...props}>
