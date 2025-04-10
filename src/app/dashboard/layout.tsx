@@ -1,5 +1,5 @@
-import Header from "@/components/Header"
-import Sidebar from "@/components/Sidebar"
+import Header from "@/components/header"
+import Sidebar from "@/components/sidebar"
 import { createClientForServer } from "@/supabase/server"
 import { User } from "@/types"
 import type { Metadata } from "next"
@@ -22,7 +22,7 @@ export default async function HeaderLayout({ children }: Props) {
 		<section className="flex">
 			<Sidebar user={user?.user_metadata as User} />
 			<div className="w-full">
-				<Header user={user?.user_metadata as User} />
+			<Header user={user?.user_metadata as User} />
 				<main className="w-full max-w-8xl">
           {children}
         </main>
