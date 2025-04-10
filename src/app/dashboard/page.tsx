@@ -18,7 +18,7 @@ export default async function DashboardPage() {
 		.eq("user_id", user.id)
 
 	return (
-		<section className="flex flex-col border-neutral-200 p-6 dark:border-neutral-800">
+		<section className="flex flex-col p-6">
 			<h2 className="mb-2 text-xl">Dashboard</h2>
 			<div className="flex flex-col gap-4 rounded-xl p-4">
 				<div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">

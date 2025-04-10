@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { useProjectStore } from "@/store/useProjectStore"
 
 interface Props {
 	delay: number
@@ -25,6 +26,7 @@ interface FormData {
 
 export default function ButtonSheetProject({ delay }: Props) {
 	const [openModal, setOpenModal] = useState(false)
+  const createProject = useProjectStore(state => state.createProject)
 	const router = useRouter()
 	const {
 		register,
@@ -37,17 +39,7 @@ export default function ButtonSheetProject({ delay }: Props) {
 	}
 
 	const onSubmit: SubmitHandler<FormData> = async form => {
-		const supabase = createClient()
-		const {
-			data: { user }
-		} = await supabase.auth.getUser()
-		await supabase
-			.from("projects")
-			.insert({
-				name: form.name.trim(),
-				description: form.description.trim(),
-				user_id: user?.id
-			})
+    createProject({ name: form.name.trim(), description: form.description.trim()})
 		handleModal()
 		router.refresh()
 	}
