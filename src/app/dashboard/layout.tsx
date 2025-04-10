@@ -1,5 +1,5 @@
-import Header from "@/components/header"
-import Sidebar from "@/components/sidebar"
+import Header from "@/components/header-layout"
+import Sidebar from "@/components/sidebar-layout"
 import { createClientForServer } from "@/supabase/server"
 import { User } from "@/types"
 import type { Metadata } from "next"
