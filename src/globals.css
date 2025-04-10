@@ -5,7 +5,6 @@
 @theme {
 	--container-8xl: 1356px;
 	--animate-fade-in: fade-in 500ms forwards;
-	--animate-rippling: rippling 500ms ease-out;
 
 	@keyframes fade-in {
 		0% {

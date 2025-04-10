@@ -19,8 +19,9 @@ export default function ProjectsGrid() {
 	return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
       {loading && (
-        Array.from({ length: 4 }).map((_, index) => (
+        Array.from({ length: 4 }).map((_, i) => (
         <div
+          key={i}
           className="aspect-video rounded-lg border border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 bg-neutral-100 p-5">
           <div className="flex w-full flex-col gap-2 animate-pulse">
             <div className="w-1/2 h-5 bg-neutral-600 dark:bg-neutral-400 rounded"></div>

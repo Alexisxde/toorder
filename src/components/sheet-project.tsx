@@ -1,7 +1,7 @@
 "use client"
 import ProjectIcon from "@/components/icons/Project.svg"
 import { Button } from "@/components/ui/Button"
-import { createClient } from "@/supabase/client"
+import { useProjectStore } from "@/store/useProjectStore"
 import {
 	ChatBubbleBottomCenterTextIcon,
 	ExclamationCircleIcon,
@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { useProjectStore } from "@/store/useProjectStore"
 
 interface Props {
 	delay: number
@@ -26,7 +25,7 @@ interface FormData {
 
 export default function ButtonSheetProject({ delay }: Props) {
 	const [openModal, setOpenModal] = useState(false)
-  const createProject = useProjectStore(state => state.createProject)
+	const createProject = useProjectStore(state => state.createProject)
 	const router = useRouter()
 	const {
 		register,
@@ -39,7 +38,10 @@ export default function ButtonSheetProject({ delay }: Props) {
 	}
 
 	const onSubmit: SubmitHandler<FormData> = async form => {
-    createProject({ name: form.name.trim(), description: form.description.trim()})
+		createProject({
+			name: form.name.trim(),
+			description: form.description.trim()
+		})
 		handleModal()
 		router.refresh()
 	}
