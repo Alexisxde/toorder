@@ -1,5 +1,4 @@
 import SignInButton from "@/components/SignInButton"
-import SignOutButton from "@/components/SignOutButton"
 import Nextjs from "@/components/icons/Nextjs"
 import React from "@/components/icons/React"
 import Supabase from "@/components/icons/Supabase"
@@ -10,7 +9,6 @@ import { createClientForServer } from "@/supabase/server"
 import { ArrowRightIcon } from "@heroicons/react/16/solid"
 import Image from "next/image"
 import Link from "next/link"
-import type { User } from "@/types"
 
 export default async function HomePage() {
 	const supabase = await createClientForServer()
@@ -27,8 +25,8 @@ export default async function HomePage() {
 			</div>
 			<header className="flex w-full items-center justify-between px-10 py-5">
 				<Link href="/">
-          <Image className="h-7 w-auto" src={Werty} alt="Werty Logo" />
-        </Link>
+					<Image className="h-7 w-auto" src={Werty} alt="Werty Logo" />
+				</Link>
 				{user ? (
 					<div className="flex items-center justify-center gap-3">
 						<Link href="/dashboard">

@@ -1,5 +1,6 @@
 "use client"
-import SignOutButton from "@/components/SignOutButton"
+import Werty from "@/components/icons/werty.svg"
+import SignOutButton from "@/components/sign-out-button"
 import { cn } from "@/lib/utils"
 import { useSideStore } from "@/store/useSideStore"
 import type { User } from "@/types"
@@ -9,11 +10,10 @@ import {
 	FolderIcon
 } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { memo } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import Werty from "@/components/icons/werty.svg"
 
 interface Props {
 	className?: string
@@ -28,14 +28,16 @@ function Sidebar({ className, user }: Props) {
 		<motion.aside
 			layout
 			className={cn(
-				"sticky top-0 flex h-dvh shrink-0 flex-col border-r-[0.25px] border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
+				"sticky top-0 z-50 flex h-dvh shrink-0 flex-col border-r-[0.25px] border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
 				className
 			)}
 			style={{ width: isOpen ? "180px" : "fit-content" }}>
 			<div className="mb-3 border-b-[0.25px] border-neutral-200 pb-3 dark:border-neutral-800">
-        <Link href="/" className="grid size-10 shrink-0 place-content-center rounded-md bg-green-600">
-          <Image className="size-5 w-auto" src={Werty} alt="Werty Logo" />
-        </Link>
+				<Link
+					href="/"
+					className="grid size-10 shrink-0 place-content-center rounded-md bg-green-600">
+					<Image className="size-5 w-auto" src={Werty} alt="Werty Logo" />
+				</Link>
 			</div>
 			<div className="flex-1 space-y-1">
 				<Option
