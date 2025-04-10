@@ -28,7 +28,7 @@ function Sidebar({ className, user }: Props) {
 		<motion.aside
 			layout
 			className={cn(
-				"sticky top-0 flex h-screen shrink-0 flex-col border-r-[0.25px] border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
+				"sticky top-0 flex h-dvh shrink-0 flex-col border-r-[0.25px] border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
 				className
 			)}
 			style={{ width: isOpen ? "200px" : "fit-content" }}>
