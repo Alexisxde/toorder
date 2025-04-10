@@ -1,6 +1,6 @@
 "use client"
+import Column from "@/components/column"
 import DeleteCard from "@/components/delete-card"
-import Column from "@/components/r-column"
 import { SheetTask } from "@/components/sheet-task"
 import { BGLoading } from "@/components/ui/Loading"
 import useTasks from "@/hooks/useTasks"

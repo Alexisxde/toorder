@@ -1,6 +1,6 @@
 "use client"
+import Card from "@/components/card"
 import DropIndicator from "@/components/drop-indicator"
-import Card from "@/components/r-card"
 import { useTaskStore } from "@/store/useTaskStore"
 import { Task } from "@/types"
 import {
