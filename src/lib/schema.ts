@@ -32,3 +32,8 @@ export const formSchemaTask = z.object({
 		message: "Badge must be one of: design, development, study, planning."
 	})
 })
+
+export const formSchemaProject = z.object({
+	name: z.string().min(1, "Title is required."),
+	description: z.string().optional()
+})

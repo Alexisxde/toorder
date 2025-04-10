@@ -1,5 +1,4 @@
 "use client"
-import SheetProject from "@/components/sheet-project"
 import useProjects from "@/hooks/useProjects"
 import { ChevronRightIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
@@ -27,7 +26,6 @@ export default function ProjectsGrid() {
           </div>
         </Link>
       ))}
-      {!loading && <SheetProject delay={projects?.length + 1} />}
     </div>
 	)
 }

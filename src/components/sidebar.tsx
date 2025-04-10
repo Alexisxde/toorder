@@ -28,11 +28,11 @@ function Sidebar({ className, user }: Props) {
 		<motion.aside
 			layout
 			className={cn(
-				"sticky top-0 z-50 flex h-dvh shrink-0 flex-col border-r-[0.25px] border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
+				"sticky top-0 z-30 flex h-dvh shrink-0 flex-col border-r-1 border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
 				className
 			)}
 			style={{ width: isOpen ? "180px" : "fit-content" }}>
-			<div className="mb-3 border-b-[0.25px] border-neutral-200 pb-3 dark:border-neutral-800">
+			<div className="mb-3 border-b-1 border-neutral-200 pb-3 dark:border-neutral-800">
 				<Link
 					href="/"
 					className="grid size-10 shrink-0 place-content-center rounded-md bg-green-600">

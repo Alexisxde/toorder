@@ -1,49 +1,114 @@
+"use client"
+
 import { cn } from "@/lib/utils"
-import * as React from "react"
+import { VariantProps, cva } from "class-variance-authority"
+import React, { MouseEvent, useEffect, useState } from "react"
 
-export type ButtonVariants = "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "icon"
-
-interface ButtonProps {
-	variant?: ButtonVariants
-	size?: "default" | "sm" | "md" | "lg" | "icon"
-}
-
-export const Button = ({
-	className,
-	variant = "default",
-	size = "default",
-	children,
-	...props
-}: React.ComponentPropsWithRef<"button"> & ButtonProps) => {
-	const variants: Record<string, string> = {
-		default:
-			"bg-gradient-to-r from-sky-400 via-sky-500 to-sky-600 shadow-sky-500/50 hover:bg-gradient-to-br focus:ring-4 focus:ring-sky-300 dark:shadow-lg dark:shadow-sky-800/80 dark:focus:ring-sky-800",
-		destructive: "bg-red-500 text-neutral-100 shadow-sm hover:bg-red-800/90",
-		icon: "text-neutral-100 hover:opacity-50",
-		outline:
-			"border border-neutral-800 bg-neutral-900 shadow-sm hover:border-neutral-700",
-		ghost: "hover:bg-neutral-500 hover:text-neutral-100",
-		link: "text-neutral-100 underline-offset-4 hover:underline"
+const buttonVariants = cva(
+	"relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md text-center",
+	{
+		variants: {
+			variant: {
+				default:
+					"bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100",
+				outline:
+					"border border-neutral-200 bg-neutral-100 transition-colors duration-150 ease-in-out hover:border-neutral-300 hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800",
+				ghost: "bg-transparent text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800",
+				link: "bg-transparent text-neutral-900 dark:text-neutral-100 underline-offset-4 hover:underline",
+				destructive:
+					"bg-red-500 text-neutral-100 dark:bg-red-900 dark:text-neutral-100",
+				disabled: "cursor-not-allowed opacity-50"
+			},
+			size: {
+				default: "px-2 py-1 text-xs",
+				sm: "px-4 py-2 text-xs",
+				md: "px-5 py-2.5 text-xs",
+				lg: "px-6 py-3 text-base"
+			},
+		},
+		defaultVariants: { variant: "default", size: "default" }
 	}
+)
 
-	const sizes: Record<string, string> = {
-		default: "px-4 py-2 text-xs",
-		sm: "px-3 py-1 text-xs",
-		lg: "px-8 text-sm",
-		icon: "size-9"
+interface ButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+		VariantProps<typeof buttonVariants> {
+      rippleColor?: string
+      duration?: string
+    }
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+	(
+		{
+			className,
+			children,
+			rippleColor = "#ffffff",
+			duration = "150ms",
+			onClick,
+			variant,
+			size,
+			...props
+		},
+		ref
+	) => {
+		const [buttonRipples, setButtonRipples] = useState<
+			Array<{ x: number; y: number; size: number; key: number }>
+		>([])
+
+		const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+			createRipple(event)
+			onClick?.(event)
+		}
+
+		const createRipple = (event: MouseEvent<HTMLButtonElement>) => {
+			const button = event.currentTarget
+			const rect = button.getBoundingClientRect()
+			const size = Math.max(rect.width, rect.height)
+			const x = event.clientX - rect.left - size / 2
+			const y = event.clientY - rect.top - size / 2
+
+			const newRipple = { x, y, size, key: Date.now() }
+			setButtonRipples(prevRipples => [...prevRipples, newRipple])
+		}
+
+		useEffect(() => {
+			if (buttonRipples.length > 0) {
+				const lastRipple = buttonRipples[buttonRipples.length - 1]
+				const timeout = setTimeout(() => {
+					setButtonRipples(prevRipples =>
+						prevRipples.filter(ripple => ripple.key !== lastRipple.key)
+					)
+				}, parseInt(duration))
+				return () => clearTimeout(timeout)
+			}
+		}, [buttonRipples, duration])
+
+		return (
+			<button
+				className={cn(buttonVariants({ variant, size }), className)}
+				onClick={handleClick}
+				ref={ref}
+				{...props}>
+				<div className="relative z-10">{children}</div>
+				<span className="pointer-events-none absolute inset-0">
+					{buttonRipples.map(ripple => (
+						<span
+							className="animate-rippling absolute rounded-full bg-neutral-900 opacity-30"
+							key={ripple.key}
+							style={{
+								width: `${ripple.size}px`,
+								height: `${ripple.size}px`,
+								top: `${ripple.y}px`,
+								left: `${ripple.x}px`,
+								backgroundColor: rippleColor,
+								transform: `scale(0)`
+							}}
+						/>
+					))}
+				</span>
+			</button>
+		)
 	}
+)
 
-	return (
-		<button
-			className={cn(
-				"focus-visible:ring-ring flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-colors duration-200 ease-in-out focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
-				variants[variant],
-				sizes[size],
-				className
-			)}
-			{...props}>
-			{children}
-		</button>
-	)
-}
 Button.displayName = "Button"

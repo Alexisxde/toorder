@@ -4,7 +4,7 @@ import React from "@/components/icons/React"
 import Supabase from "@/components/icons/Supabase"
 import TailWind from "@/components/icons/Tailwind"
 import Werty from "@/components/icons/werty.svg"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 import { createClientForServer } from "@/supabase/server"
 import { ArrowRightIcon } from "@heroicons/react/16/solid"
 import Image from "next/image"
@@ -30,7 +30,7 @@ export default async function HomePage() {
 				{user ? (
 					<div className="flex items-center justify-center gap-3">
 						<Link href="/dashboard">
-							<Button>Dashboard</Button>
+							<Button variant="outline" rippleColor="#202724">Dashboard</Button>
 						</Link>
 					</div>
 				) : (
