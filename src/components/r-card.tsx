@@ -1,4 +1,4 @@
-import DropIndicator from "@/components/DropIndicator"
+import DropIndicator from "@/components/drop-indicator"
 import { month } from "@/lib/utils"
 import type { Task } from "@/types"
 import { CalendarDaysIcon } from "@heroicons/react/24/solid"

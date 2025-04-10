@@ -1,4 +1,4 @@
-import SignInButton from "@/components/SignInButton"
+import SignInButton from "@/components/button-sign-in"
 import Nextjs from "@/components/icons/Nextjs"
 import React from "@/components/icons/React"
 import Supabase from "@/components/icons/Supabase"
@@ -30,7 +30,9 @@ export default async function HomePage() {
 				{user ? (
 					<div className="flex items-center justify-center gap-3">
 						<Link href="/dashboard">
-							<Button variant="outline" rippleColor="#202724">Dashboard</Button>
+							<Button variant="outline" rippleColor="#202724">
+								Dashboard
+							</Button>
 						</Link>
 					</div>
 				) : (

@@ -1,8 +1,8 @@
 "use client"
-import Column from "@/components/Column"
-import DeleteCard from "@/components/DeleteCard"
-import { BGLoading } from "@/components/ui/Loading"
+import DeleteCard from "@/components/delete-card"
+import Column from "@/components/r-column"
 import { SheetTask } from "@/components/sheet-task"
+import { BGLoading } from "@/components/ui/Loading"
 import useTasks from "@/hooks/useTasks"
 import { use } from "react"
 
@@ -46,21 +46,21 @@ export default function Page({ params }: Props) {
 
 	return (
 		<section className="mx-auto flex flex-col p-5 pt-2">
-      <div className="flex items-center justify-end mb-2">
-        <SheetTask id={id} />
-      </div>
-      <div className="flex gap-4">
-        {COLUMNS.map(({ title, column, textColor, bgColor }) => (
-          <Column
-            key={column}
-            title={title}
-            column={column}
-            textColor={textColor}
-            bgColor={bgColor}
-          />
-        ))}
-			  <DeleteCard />
-      </div>
+			<div className="mb-2 flex items-center justify-end">
+				<SheetTask id={id} />
+			</div>
+			<div className="flex gap-4">
+				{COLUMNS.map(({ title, column, textColor, bgColor }) => (
+					<Column
+						key={column}
+						title={title}
+						column={column}
+						textColor={textColor}
+						bgColor={bgColor}
+					/>
+				))}
+				<DeleteCard />
+			</div>
 		</section>
 	)
 }

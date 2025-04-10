@@ -1,6 +1,6 @@
 "use client"
+import SignOutButton from "@/components/button-sign-out"
 import Werty from "@/components/icons/werty.svg"
-import SignOutButton from "@/components/sign-out-button"
 import { cn } from "@/lib/utils"
 import { useSideStore } from "@/store/useSideStore"
 import type { User } from "@/types"
