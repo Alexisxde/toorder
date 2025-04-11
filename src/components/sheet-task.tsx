@@ -2,17 +2,16 @@
 import { Sheet } from "@/components/ui/Sheet"
 import { Button } from "@/components/ui/button"
 import Error from "@/components/ui/error"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/r-input"
 import { formSchemaTask } from "@/lib/schema"
-import { useProjectStore } from "@/store/useProjectStore"
+import { cn } from "@/lib/utils"
 import { useTaskStore } from "@/store/useTaskStore"
+import { PhotoIcon } from "@heroicons/react/24/outline"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
-import { PhotoIcon } from "@heroicons/react/24/outline"
-import { cn } from "@/lib/utils"
 
 interface Props {
 	id: string
@@ -21,13 +20,13 @@ interface Props {
 type FormData = z.infer<typeof formSchemaTask>
 
 export const SheetTask = ({ id }: Props) => {
-  const [open, setOpen] = useState(false)
+	const [open, setOpen] = useState(false)
 	const createTask = useTaskStore(state => state.createTask)
 	const [image, setImage] = useState<File | null>(null)
 	const {
 		register,
 		handleSubmit,
-    reset,
+		reset,
 		formState: { errors }
 	} = useForm<FormData>({ resolver: zodResolver(formSchemaTask) })
 
@@ -48,7 +47,7 @@ export const SheetTask = ({ id }: Props) => {
 			img_url: image_url,
 			project_id: id
 		} as Task
-    reset()
+		reset()
 		createTask(task)
 		setOpen(false)
 	}
@@ -104,7 +103,7 @@ export const SheetTask = ({ id }: Props) => {
 							Study
 						</option>
 					</select>
-          {errors?.badge && <Error message={errors?.badge.message} />}
+					{errors?.badge && <Error message={errors?.badge.message} />}
 				</div>
 				<div className="grid w-full max-w-sm items-center gap-1.5">
 					<Label htmlFor="description">Description task</Label>
@@ -142,7 +141,7 @@ export const SheetTask = ({ id }: Props) => {
 							{...register("image")}
 							onChange={e => setImage(e.target.files?.[0] as File)}
 						/>
-            {errors?.image && <Error message={errors?.image.message} />}
+						{errors?.image && <Error message={errors?.image.message} />}
 					</div>
 					<div className="overflow-hidden text-center text-[10px] before:relative before:right-2 before:inline-block before:h-[1px] before:w-1/4 before:bg-neutral-800 before:align-middle after:relative after:left-2 after:inline-block after:h-[1px] after:w-1/4 after:bg-neutral-800 after:align-middle">
 						or
@@ -156,7 +155,13 @@ export const SheetTask = ({ id }: Props) => {
 					/>
 					{errors?.image_url && <Error message={errors?.image_url.message} />}
 				</div>
-				<Button variant="outline" rippleColor="#202724" className="mt-2 max-w-sm" size="sm">Create task</Button>
+				<Button
+					variant="outline"
+					rippleColor="#202724"
+					className="mt-2 max-w-sm"
+					size="sm">
+					Create task
+				</Button>
 			</form>
 		</Sheet>
 	)
