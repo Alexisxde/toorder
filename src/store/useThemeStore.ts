@@ -8,10 +8,10 @@ interface ThemeState {
 
 export const useThemeStore = create<ThemeState>()(
 	persist(
-		(set, get) => ({
+		set => ({
 			theme: "dark",
 			setTheme: theme => {
-        set({ theme })
+				set({ theme })
 			}
 		}),
 		{ name: "theme" }

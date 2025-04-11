@@ -3,19 +3,19 @@ import { useTaskStore } from "@/store/useTaskStore"
 import { useEffect } from "react"
 
 interface Props {
-  id: string
+	id: string
 }
 
 const useTasks = ({ id }: Props) => {
-  const getTasks = useTaskStore(state => state.getTasks)
+	const getTasks = useTaskStore(state => state.getTasks)
 	const loading = useTaskStore(state => state.loading)
 	const tasks = useTaskStore(state => state.tasks)
-  
+
 	useEffect(() => {
 		getTasks(id)
 	}, [id, getTasks])
 
-  return { loading, tasks }
+	return { loading, tasks }
 }
 
 export default useTasks

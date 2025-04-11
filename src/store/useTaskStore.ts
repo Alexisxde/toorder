@@ -23,7 +23,7 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 			const { data } = await supabase.from("tasks").insert(task).select()
 			set({ tasks: [...(tasks || []), data?.[0]] })
 		} catch (error) {
-			console.error("Error updating task:", error)
+			console.error("Error updating task:", error) // eslint-disable-line no-console
 			set({ tasks })
 		}
 	},
@@ -47,7 +47,7 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 			try {
 				await supabase.from("tasks").update({ column }).eq("id", id)
 			} catch (error) {
-				console.error("Error updating task:", error)
+				console.error("Error updating task:", error) // eslint-disable-line no-console
 				set({ tasks: currentState })
 			}
 		}, 3000)
@@ -60,7 +60,7 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 		try {
 			await supabase.from("tasks").delete().eq("id", id)
 		} catch (error) {
-			console.error("Error deleting task:", error)
+			console.error("Error deleting task:", error) // eslint-disable-line no-console
 			set({ tasks: currentState })
 		}
 	}

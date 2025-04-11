@@ -7,6 +7,7 @@ import { createClient } from "@/supabase/client"
 import type { User } from "@/types"
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
@@ -61,7 +62,7 @@ export default function SignOutButton({ user }: Props) {
 				className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1 transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800"
 				onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
 				<div className="relative inline-flex">
-					<img
+					<Image
 						src={user?.avatar_url as string}
 						alt={user?.user_name as string}
 						className="inline-block size-7 rounded-full object-cover object-center"

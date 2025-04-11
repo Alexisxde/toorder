@@ -80,7 +80,7 @@ const Option = ({
 	isOpen,
 	href
 }: {
-	Icon: any
+	Icon: any // eslint-disable-line @typescript-eslint/no-explicit-any
 	title: string
 	isOpen: boolean
 	href: string

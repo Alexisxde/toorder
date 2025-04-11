@@ -14,7 +14,7 @@ export function AnimatedNumber({
 	className,
 	springOptions
 }: AnimatedNumberProps) {
-  const [displayValue, setDisplayValue] = useState("")
+	const [displayValue, setDisplayValue] = useState("")
 	const spring = useSpring(value, springOptions)
 	const display = useTransform(spring, current =>
 		Math.round(current).toLocaleString()

@@ -10,7 +10,8 @@ import { useTaskStore } from "@/store/useTaskStore"
 import { type Task } from "@/types"
 import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import Image from "next/image"
+import { useCallback, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -35,7 +36,7 @@ export const SheetTask = ({ id }: Props) => {
 		title,
 		description,
 		badge,
-		image,
+		image, // eslint-disable-line @typescript-eslint/no-unused-vars
 		image_url
 	}) => {
 		const task = {
@@ -53,8 +54,15 @@ export const SheetTask = ({ id }: Props) => {
 		setOpen(false)
 	}
 
+	const memoizedSetOpen = useCallback(
+		(value: boolean | ((prevState: boolean) => boolean)) => {
+			setOpen(value)
+		},
+		[]
+	)
+
 	return (
-		<Sheet title="Create task" open={open} setOpen={setOpen}>
+		<Sheet title="Create task" open={open} setOpen={memoizedSetOpen}>
 			<form
 				className="grid gap-2 px-6"
 				autoComplete="nope"
@@ -127,7 +135,11 @@ export const SheetTask = ({ id }: Props) => {
 									onClick={() => setImage(null)}>
 									<XMarkIcon className="size-4" />
 								</Button>
-								<img src={URL.createObjectURL(image)} className="h-32" />
+								<Image
+									src={URL.createObjectURL(image)}
+									className="h-32"
+									alt="Photo image"
+								/>
 							</div>
 						) : (
 							<div className="flex h-32 cursor-not-allowed items-center justify-center border border-neutral-800 bg-neutral-900 opacity-50">
@@ -150,7 +162,7 @@ export const SheetTask = ({ id }: Props) => {
 						or
 					</div>
 					<Input
-						disabled={image ? true : false}
+						disabled={image ? true : false} // eslint-disable-line no-unneeded-ternary
 						className={errors?.image_url && "border-red-500"}
 						type="text"
 						placeholder="https://exampleimg.com"

@@ -1,11 +1,10 @@
 "use client"
-import { createClient } from "@/supabase/client"
 import { useTaskStore } from "@/store/useTaskStore"
 import { FireIcon, TrashIcon } from "@heroicons/react/24/solid"
 import { useState } from "react"
 
 export default function DeleteCard() {
-  const deleteTask = useTaskStore(state => state.deleteTask)
+	const deleteTask = useTaskStore(state => state.deleteTask)
 	const [active, setActive] = useState(false)
 
 	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {

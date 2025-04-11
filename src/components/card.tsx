@@ -3,10 +3,11 @@ import { month } from "@/lib/utils"
 import type { Task } from "@/types"
 import { CalendarDaysIcon } from "@heroicons/react/24/solid"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 interface Props {
 	task: Task
-	handleDragStart: (e: any, task: Task) => void
+	handleDragStart: (e: any, task: Task) => void // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export default function Card({ task, handleDragStart }: Props) {
@@ -42,7 +43,7 @@ export default function Card({ task, handleDragStart }: Props) {
 					</span>
 					<span className="text-sm font-medium text-neutral-100">{title}</span>
 					{img_url && (
-						<img
+						<Image
 							src={img_url}
 							alt={title}
 							className="mb-2 w-full rounded-sm object-cover"

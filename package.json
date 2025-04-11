@@ -7,7 +7,9 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"types:supabase": "pnpx supabase gen types typescript --project-id \"pesxmidbyqvctisbkdie\" --schema public > src/supabase/database.d.ts"
+		"types:supabase": "pnpx supabase gen types typescript --project-id \"pesxmidbyqvctisbkdie\" --schema public > src/supabase/database.d.ts",
+    "format": "pnpx prettier --write .",
+    "format:check": "pnpx prettier --check ."
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.2.0",

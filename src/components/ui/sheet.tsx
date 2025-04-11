@@ -56,7 +56,7 @@ export const Sheet = ({
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside)
 		}
-	}, [])
+	}, [setOpen])
 
 	return (
 		<>
@@ -64,7 +64,7 @@ export const Sheet = ({
 				rippleColor="#202724"
 				variant="outline"
 				onClick={toggleSheet}
-        className="mb-0">
+				className="mb-0">
 				<PlusIcon className="size-5" />
 			</Button>
 			<AnimatePresence mode="wait" initial={false}>

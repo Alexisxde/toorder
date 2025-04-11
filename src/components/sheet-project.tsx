@@ -7,7 +7,7 @@ import { Sheet } from "@/components/ui/sheet"
 import { formSchemaProject } from "@/lib/schema"
 import { useProjectStore } from "@/store/useProjectStore"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -34,8 +34,15 @@ export const SheetProject = () => {
 		setOpen(false)
 	}
 
+	const memoizedSetOpen = useCallback(
+		(value: boolean | ((prevState: boolean) => boolean)) => {
+			setOpen(value)
+		},
+		[]
+	)
+
 	return (
-		<Sheet title="Create project" open={open} setOpen={setOpen}>
+		<Sheet title="Create project" open={open} setOpen={memoizedSetOpen}>
 			<form
 				className="flex flex-col items-center justify-center gap-4"
 				onSubmit={handleSubmit(onSubmit)}
@@ -73,11 +80,4 @@ export const SheetProject = () => {
 			</form>
 		</Sheet>
 	)
-}
-
-const framerSidebarBackground = {
-	initial: { opacity: 0 },
-	animate: { opacity: 1 },
-	exit: { opacity: 0, transition: { delay: 0.1 } },
-	transition: { duration: 0.2 }
 }

@@ -32,7 +32,7 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
 				.select()
 			set({ projects: [...(projects || []), data?.[0]] })
 		} catch (error) {
-			console.error("Error updating project:", error)
+			console.error("Error updating project:", error) // eslint-disable-line no-console
 			set({ projects })
 		}
 	},
