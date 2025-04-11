@@ -65,6 +65,8 @@ export default function SignOutButton({ user }: Props) {
 					<Image
 						src={user?.avatar_url as string}
 						alt={user?.user_name as string}
+            width="28"
+            height="28"
 						className="inline-block size-7 rounded-full object-cover object-center"
 					/>
 					<span className="absolute right-[14%] bottom-[14%] grid min-h-[10px] min-w-[10px] translate-x-1/2 translate-y-1/2 place-items-center rounded-full border border-green-500 bg-green-500 px-1 py-0.5 leading-none"></span>
