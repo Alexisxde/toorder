@@ -2,7 +2,7 @@
 import Column from "@/components/column"
 import DeleteCard from "@/components/delete-card"
 import { SheetTask } from "@/components/sheet-task"
-import { BGLoading } from "@/components/ui/r-loading"
+import { BGLoading } from "@/components/ui/loading"
 import useTasks from "@/hooks/useTasks"
 import { use } from "react"
 
