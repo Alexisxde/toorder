@@ -30,7 +30,7 @@ export default async function HomePage() {
 				{user ? (
 					<div className="flex items-center justify-center gap-3">
 						<Link href="/dashboard">
-							<Button variant="outline" rippleColor="#202724">
+							<Button variant="outline" size="sm" rippleColor="#202724">
 								Dashboard
 							</Button>
 						</Link>

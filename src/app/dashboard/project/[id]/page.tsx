@@ -2,9 +2,9 @@
 import Column from "@/components/column"
 import DeleteCard from "@/components/delete-card"
 import { SheetTask } from "@/components/sheet-task"
-import { BGLoading } from "@/components/ui/loading"
 import useTasks from "@/hooks/useTasks"
 import { use } from "react"
+import CardTaskSkeleton from "@/components/ui/card-task-skeleton"
 
 interface Props {
 	params: Promise<{ id: string }>
@@ -39,10 +39,7 @@ const COLUMNS = [
 
 export default function Page({ params }: Props) {
 	const { id } = use(params)
-	const { loading, tasks } = useTasks({ id })
-
-	if (loading) return <BGLoading />
-	if (!tasks || tasks === null) return <div>Tasks not found...</div>
+	const { loading } = useTasks({ id })
 
 	return (
 		<section className="mx-auto flex flex-col p-5 pt-2">
@@ -50,15 +47,17 @@ export default function Page({ params }: Props) {
 				<SheetTask id={id} />
 			</div>
 			<div className="flex gap-4">
-				{COLUMNS.map(({ title, column, textColor, bgColor }) => (
-					<Column
-						key={column}
-						title={title}
-						column={column}
-						textColor={textColor}
-						bgColor={bgColor}
-					/>
-				))}
+				{loading && [...Array(4)].map(i => <CardTaskSkeleton key={i} />)}
+				{!loading &&
+					COLUMNS.map(({ title, column, textColor, bgColor }) => (
+						<Column
+							key={column}
+							title={title}
+							column={column}
+							textColor={textColor}
+							bgColor={bgColor}
+						/>
+					))}
 				<DeleteCard />
 			</div>
 		</section>

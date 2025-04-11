@@ -16,7 +16,7 @@ let debounceTimeout: NodeJS.Timeout
 
 export const useTaskStore = create<TaskState>((set, get) => ({
 	tasks: [],
-	loading: false,
+	loading: true,
 	createTask: async task => {
 		const tasks = get().tasks
 		try {
@@ -28,7 +28,6 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 		}
 	},
 	getTasks: async id => {
-		set({ loading: true })
 		const { data } = await supabase.from("tasks").select().eq("project_id", id)
 		set({ tasks: data || null, loading: false })
 	},
