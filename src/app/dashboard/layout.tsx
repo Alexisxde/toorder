@@ -20,13 +20,13 @@ export default async function HeaderLayout({ children }: Props) {
 	if (!user) redirect("/")
 
 	return (
-    <section className="flex">
-      <Sidebar user={user?.user_metadata as User} />
-      <div className="flex flex-col w-full">
-        <Header user={user?.user_metadata as User} />
-        <main className="flex-1 overflow-y-auto max-w-8xl w-full">{children}</main>
-        <Footer />
-      </div>
-    </section>
+		<section className="flex">
+			<Sidebar user={user?.user_metadata as User} />
+			<div className="flex w-full flex-col">
+				<Header user={user?.user_metadata as User} />
+				<main className="max-w-8xl mx-auto w-full flex-1">{children}</main>
+				<Footer />
+			</div>
+		</section>
 	)
 }

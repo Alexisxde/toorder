@@ -1,12 +1,11 @@
 "use client"
 import GitHub from "@/components/icons/GitHub"
-import { applyTheme } from "@/lib/utils"
 import { useSideStore } from "@/store/useSideStore"
-import { useThemeStore } from "@/store/useThemeStore"
 import { createClient } from "@/supabase/client"
 import type { User } from "@/types"
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
+import { useTheme } from "next-themes"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
@@ -17,8 +16,7 @@ interface Props {
 
 export default function SignOutButton({ user }: Props) {
 	const isOpen = useSideStore(state => state.isOpen)
-	const theme = useThemeStore(state => state.theme)
-	const setTheme = useThemeStore(state => state.setTheme)
+	const { theme, setTheme } = useTheme()
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 	const dropdownRef = useRef<HTMLDivElement | null>(null)
 	const supabase = createClient()
@@ -33,10 +31,6 @@ export default function SignOutButton({ user }: Props) {
 			console.error(error) // eslint-disable-line no-console
 		}
 	}
-
-	useEffect(() => {
-		applyTheme(theme)
-	}, [theme])
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -65,8 +59,8 @@ export default function SignOutButton({ user }: Props) {
 					<Image
 						src={user?.avatar_url as string}
 						alt={user?.user_name as string}
-            width="28"
-            height="28"
+						width="28"
+						height="28"
 						className="inline-block size-7 rounded-full object-cover object-center"
 					/>
 					<span className="absolute right-[14%] bottom-[14%] grid min-h-[10px] min-w-[10px] translate-x-1/2 translate-y-1/2 place-items-center rounded-full border border-green-500 bg-green-500 px-1 py-0.5 leading-none"></span>

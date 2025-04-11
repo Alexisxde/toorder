@@ -1,5 +1,6 @@
 import "@/globals.css"
 import type { Metadata } from "next"
+import { ThemeProvider } from "next-themes"
 import { Poppins } from "next/font/google"
 
 const poppins = Poppins({
@@ -8,14 +9,18 @@ const poppins = Poppins({
 	subsets: ["latin"]
 })
 
-export const metadata: Metadata = { title: "Tarea Plus - Todo App" }
+export const metadata: Metadata = { title: "Werty - Todo App" }
 
 export default function RootLayout({
 	children
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html lang="es">
-			<body className={`${poppins.className}`}>{children}</body>
+		<html lang="es" className="dark">
+			<body className={`${poppins.className}`}>
+				<ThemeProvider attribute="class">
+					{children}
+				</ThemeProvider>
+			</body>
 		</html>
 	)
 }
