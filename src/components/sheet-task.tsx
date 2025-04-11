@@ -1,13 +1,14 @@
 "use client"
-import { Sheet } from "@/components/ui/Sheet"
 import { Button } from "@/components/ui/button"
 import Error from "@/components/ui/error"
-import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/r-input"
+import { Label } from "@/components/ui/r-label"
+import { Sheet } from "@/components/ui/r-sheet"
 import { formSchemaTask } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 import { useTaskStore } from "@/store/useTaskStore"
-import { PhotoIcon } from "@heroicons/react/24/outline"
+import { type Task } from "@/types"
+import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -141,7 +142,9 @@ export const SheetTask = ({ id }: Props) => {
 							{...register("image")}
 							onChange={e => setImage(e.target.files?.[0] as File)}
 						/>
-						{errors?.image && <Error message={errors?.image.message} />}
+						{errors?.image && (
+							<Error message={errors?.image.message as string} />
+						)}
 					</div>
 					<div className="overflow-hidden text-center text-[10px] before:relative before:right-2 before:inline-block before:h-[1px] before:w-1/4 before:bg-neutral-800 before:align-middle after:relative after:left-2 after:inline-block after:h-[1px] after:w-1/4 after:bg-neutral-800 after:align-middle">
 						or
