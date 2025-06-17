@@ -20,9 +20,9 @@ function Sidebar({ className, user }: Props) {
 	return (
 		<motion.aside
 			layout
-			className="relative flex h-dvh border-r-1 border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
+			className="sticky top-0 flex h-dvh border-r-1 border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
 			<div
-				className={cn("sticky top-0 flex h-dvh shrink-0 flex-col", className)}
+				className={cn("flex h-dvh shrink-0 flex-col", className)}
 				style={{ width: isOpen ? "250px" : "8px" }}>
 				{isOpen && (
 					<>

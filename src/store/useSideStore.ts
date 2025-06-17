@@ -6,6 +6,6 @@ interface SideState {
 }
 
 export const useSideStore = create<SideState>((set, get) => ({
-	isOpen: true,
+	isOpen: false,
 	setIsOpen: () => set({ isOpen: !get().isOpen })
 }))

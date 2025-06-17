@@ -42,7 +42,7 @@ export default function Page({ params }: Props) {
 	const { loading } = useTasks({ id })
 
 	return (
-		<section className="mx-auto flex flex-col p-5 pt-2">
+		<section className="mx-auto flex flex-col p-5 pt-2 overflow-y-hidden">
 			<div className="mb-2 flex items-center justify-end">
 				<SheetTask id={id} />
 			</div>
