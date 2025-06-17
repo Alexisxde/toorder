@@ -26,9 +26,7 @@ function Sidebar({ className, user }: Props) {
 				style={{ width: isOpen ? "250px" : "8px" }}>
 				{isOpen && (
 					<>
-            <div className="h-12 max-h-12 min-h-12 border-b-1 border-neutral-200 dark:border-neutral-800">
-              a
-            </div>
+            <div className="h-12 max-h-12 min-h-12 border-b-1 border-neutral-200 dark:border-neutral-800"></div>
 						<div className="flex-1 space-y-1">
               
 						</div>
