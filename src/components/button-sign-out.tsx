@@ -63,8 +63,7 @@ export default function SignOutButton({ user }: Props) {
 						height="28"
 						className="inline-block size-7 rounded-full object-cover object-center"
 					/>
-					<span className="absolute right-[14%] bottom-[14%] grid min-h-[10px] min-w-[10px] translate-x-1/2 translate-y-1/2 place-items-center rounded-full border border-green-500 bg-green-500 px-1 py-0.5 leading-none"></span>
-				</div>
+		    </div>
 				{isOpen && (
 					<motion.div
 						layout
@@ -73,15 +72,10 @@ export default function SignOutButton({ user }: Props) {
 						transition={{ delay: 0.125 }}
 						className="flex flex-col">
 						<span className="text-xs font-medium">{user?.name}</span>
-						<a
-							target="_blank"
-							href={`https://github.com/${user?.user_name}`}
-							className="group inline-flex items-center gap-1 text-xs text-neutral-600 dark:text-neutral-400 [&_svg]:fill-neutral-600 dark:[&_svg]:fill-neutral-400">
-							<GitHub className="size-3 group-hover:fill-neutral-700 dark:group-hover:fill-neutral-300" />
-							<span className="group-hover:text-neutral-700 dark:group-hover:fill-neutral-300">
-								{user?.user_name}
-							</span>
-						</a>
+						<div className="inline-flex items-center gap-1 text-xs text-neutral-600 dark:text-neutral-400">
+							<GitHub className="size-3" />
+							<span>{user?.user_name}</span>
+						</div>
 					</motion.div>
 				)}
 			</button>
@@ -90,7 +84,7 @@ export default function SignOutButton({ user }: Props) {
 				initial={wrapperVariants.closed}
 				variants={wrapperVariants}
 				style={{ originY: "bottom" }}
-				className="absolute top-[-205px] left-[20px] flex flex-col gap-2 rounded-md border border-neutral-200 bg-neutral-100 p-2 text-[11px] dark:border-neutral-800 dark:bg-neutral-900">
+				className="absolute top-[-205px] left-0 w-full flex flex-col gap-2 rounded-md border border-neutral-200 bg-neutral-100 p-2 text-[11px] dark:border-neutral-800 dark:bg-neutral-900">
 				<div className="flex flex-col border-b-1 border-neutral-200 p-1 dark:border-neutral-800">
 					<span className="text-xs">{user?.user_name}</span>
 					<span className="mb-1 text-[11px] text-neutral-600 dark:text-neutral-400">

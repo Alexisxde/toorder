@@ -4,26 +4,26 @@ import { cn } from "@/lib/utils"
 import { VariantProps, cva } from "class-variance-authority"
 import React, { MouseEvent, useEffect, useState } from "react"
 
-const buttonVariants = cva(
-	"relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md text-center",
+export const buttonVariants = cva(
+	"relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md text-center transition-colors duration-300 ease-in-out",
 	{
 		variants: {
 			variant: {
 				default:
 					"bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100",
 				outline:
-					"border border-neutral-200 bg-neutral-100 transition-colors duration-150 ease-in-out hover:border-neutral-300 hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800",
+					"border border-neutral-200 bg-neutral-100 hover:border-neutral-300 hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800",
 				ghost:
 					"bg-transparent text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800",
 				link: "bg-transparent text-neutral-900 dark:text-neutral-100 underline-offset-4 hover:underline",
 				destructive:
-					"border transition-colors duration-150 ease-in-out text-red-700 border-red-500 bg-red-200 hover:border-red-400 hover:bg-red-300 dark:text-red-600 dark:border-red-800 dark:bg-red-900 dark:hover:border-red-700 dark:hover:bg-red-800"
+					"border text-red-700 border-red-500 bg-red-200 hover:border-red-400 hover:bg-red-300 dark:text-red-600 dark:border-red-800 dark:bg-red-900 dark:hover:border-red-700 dark:hover:bg-red-800"
 			},
 			size: {
 				default: "px-2 py-1 text-xs",
 				sm: "px-4 py-2 text-xs",
 				md: "px-5 py-2.5 text-xs",
-				lg: "px-6 py-3 text-base"
+				lg: "px-6 py-3 text-sm"
 			},
 			disabled: { true: "cursor-not-allowed opacity-50" }
 		},
@@ -91,7 +91,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				onClick={handleClick}
 				ref={ref}
 				{...props}>
-				<div className="relative z-10">{children}</div>
+				<div className="relative z-10 flex items-center justify-between gap-2">
+					{children}
+				</div>
 				<span className="pointer-events-none absolute inset-0">
 					{buttonRipples.map(ripple => (
 						<span

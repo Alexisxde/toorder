@@ -1,17 +1,10 @@
 "use client"
 import SignOutButton from "@/components/button-sign-out"
-import Werty from "@/components/icons/werty.svg"
+import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useSideStore } from "@/store/useSideStore"
 import type { User } from "@/types"
-import {
-	ChevronDoubleRightIcon,
-	ClipboardDocumentIcon,
-	FolderIcon
-} from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { memo } from "react"
 
@@ -27,49 +20,30 @@ function Sidebar({ className, user }: Props) {
 	return (
 		<motion.aside
 			layout
-			className={cn(
-				"sticky top-0 z-30 flex h-dvh shrink-0 flex-col border-r-1 border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900",
-				className
-			)}
-			style={{ width: isOpen ? "180px" : "fit-content" }}>
-			<div className="mb-3 border-b-1 border-neutral-200 pb-3 dark:border-neutral-800">
-				<Link
-					href="/"
-					className="grid size-10 shrink-0 place-content-center rounded-md bg-green-600">
-					<Image className="size-5 w-auto" src={Werty} alt="Werty Logo" />
-				</Link>
+			className="relative flex h-dvh border-r-1 border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
+			<div
+				className={cn("sticky top-0 flex h-dvh shrink-0 flex-col", className)}
+				style={{ width: isOpen ? "250px" : "8px" }}>
+				{isOpen && (
+					<>
+            <div className="h-12 max-h-12 min-h-12 border-b-1 border-neutral-200 dark:border-neutral-800">
+              a
+            </div>
+						<div className="flex-1 space-y-1">
+              
+						</div>
+						<div className="p-2">
+							<SignOutButton user={user} />
+						</div>
+					</>
+				)}
 			</div>
-			<div className="flex-1 space-y-1">
-				<Option
-					Icon={ClipboardDocumentIcon}
-					title="Dashboard"
-					href="/dashboard"
-					isOpen={isOpen}
-				/>
-				<Option
-					Icon={FolderIcon}
-					title="Projects"
-					href="/dashboard/project"
-					isOpen={isOpen}
-				/>
-			</div>
-			<div className="flex flex-col gap-2">
-				<SignOutButton user={user} />
-				<motion.button
-					layout
-					onClick={() => setIsOpen()}
-					className="rounded-md border-neutral-200 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800">
-					<div className="flex items-center justify-center">
-						<motion.div
-							layout
-							className="grid size-10 place-content-center text-lg">
-							<ChevronDoubleRightIcon
-								className={`size-4 text-neutral-900 transition-transform dark:text-neutral-100 ${isOpen && "rotate-180"}`}
-							/>
-						</motion.div>
-					</div>
-				</motion.button>
-			</div>
+			<button
+				onClick={() => setIsOpen()}
+				className={cn(
+					buttonVariants({ variant: "ghost" }),
+					"absolute top-0 bottom-0 right-0 w-[8px] cursor-pointer rounded-none focus:outline-none"
+				)}></button>
 		</motion.aside>
 	)
 }

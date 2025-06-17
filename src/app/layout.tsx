@@ -9,7 +9,7 @@ const poppins = Poppins({
 	subsets: ["latin"]
 })
 
-export const metadata: Metadata = { title: "Werty - Todo App" }
+export const metadata: Metadata = { title: "ToOrder Tasks" }
 
 export default function RootLayout({
 	children

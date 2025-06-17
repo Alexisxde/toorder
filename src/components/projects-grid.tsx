@@ -14,7 +14,7 @@ export default function ProjectsGrid() {
 				<Link
 					key={id}
 					className="animate-fade-in group relative flex aspect-video flex-col gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-5 transition-colors duration-150 ease-in-out hover:border-neutral-300 hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800"
-					href={`/dashboard/project/${id}`}
+					href={`/app/${id}`}
 					style={{ animationDelay: `calc(0.1s * ${i + 1}` }}>
 					<div className="flex w-full flex-col">
 						<h3 className="mb-1 flex-shrink pr-4 text-sm">{name}</h3>

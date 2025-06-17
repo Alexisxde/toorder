@@ -1,23 +1,27 @@
+import GitHubIcon from "@/components/icons/GitHub"
+import { Button } from "@/components/ui/button"
+import { SparklesIcon } from "@heroicons/react/24/outline"
+import Link from "next/link"
+
 export default function Footer() {
 	return (
-		<footer className="border-t-1 border-neutral-200 bg-neutral-100 p-4 text-center text-xs text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
-			<p>
-				Construido por{"  "}
-				<a
-					className="underline"
-					target="_blank"
-					href="https://github.com/Alexisxde">
-					Alexis
-				</a>
-				, el uso de NextJS, Motion, Tailwindcss y Supabase. El el código fuente
-				está disponible en{"  "}
-				<a
-					className="underline"
-					target="_blank"
-					href="https://github.com/Alexisxde/tarea-plus">
-					GitHub.
-				</a>
-			</p>
-		</footer>
+		<nav className="absolute right-5 bottom-4 flex items-center space-x-2">
+			<Link href="https://github.com/Alexisxde/toorder" target="_blank">
+				<Button variant="outline" className="flex items-center space-x-2">
+					<div className="flex items-center space-x-2">
+						<GitHubIcon className="size-4 fill-neutral-900 dark:fill-neutral-500" />
+						<span>GitHub</span>
+					</div>
+				</Button>
+			</Link>
+			<Link href="https://alexisxde.github.io" target="_blank">
+				<Button variant="outline" className="flex items-center space-x-2">
+					<div className="flex items-center space-x-2">
+						<SparklesIcon className="size-4 text-neutral-800 dark:text-neutral-500" />
+						<span>Built by Alexis</span>
+					</div>
+				</Button>
+			</Link>
+		</nav>
 	)
 }
