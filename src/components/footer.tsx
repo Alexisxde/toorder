@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function Footer() {
 	return (
-		<footer className="sticky bottom-4 flex items-center justify-end space-x-2">
+		<footer className="sticky bottom-4 flex items-center justify-end space-x-2 px-4">
 			<Link href="https://github.com/Alexisxde/toorder" target="_blank">
 				<Button variant="outline" className="flex items-center space-x-2">
 					<div className="flex items-center space-x-2">
