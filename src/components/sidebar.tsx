@@ -1,10 +1,14 @@
 "use client"
 import SignOutButton from "@/components/button-sign-out"
+import { PinList } from "@/components/pin-list"
 import { buttonVariants } from "@/components/ui/button"
+import useProjects from "@/hooks/useProjects"
 import { cn } from "@/lib/utils"
 import { useSideStore } from "@/store/useSideStore"
 import type { User } from "@/types"
+import { HomeIcon } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { memo } from "react"
 
@@ -16,6 +20,8 @@ interface Props {
 function Sidebar({ className, user }: Props) {
 	const isOpen = useSideStore(state => state.isOpen)
 	const setIsOpen = useSideStore(state => state.setIsOpen)
+	const { projects } = useProjects()
+	if (!projects) return null
 
 	return (
 		<motion.aside
@@ -26,9 +32,20 @@ function Sidebar({ className, user }: Props) {
 				style={{ width: isOpen ? "250px" : "8px" }}>
 				{isOpen && (
 					<>
-            <div className="h-12 max-h-12 min-h-12 border-b-1 border-neutral-200 dark:border-neutral-800"></div>
-						<div className="flex-1 space-y-1">
-              
+						<div className="h-12 max-h-12 min-h-12 border-b-1 border-neutral-200 dark:border-neutral-800"></div>
+						<div className="border-b-1 border-neutral-200 p-4 dark:border-neutral-800">
+							<Link
+								href="/app"
+								className={cn(
+									buttonVariants({ variant: "ghost", size: "lg" }),
+									"flex w-full items-start justify-start gap-2 text-left"
+								)}>
+								<HomeIcon className="size-4" />
+								Home
+							</Link>
+						</div>
+						<div className="flex-1 space-y-1 overflow-y-auto px-4">
+							<PinList items={projects} />
 						</div>
 						<div className="p-2">
 							<SignOutButton user={user} />
@@ -40,7 +57,7 @@ function Sidebar({ className, user }: Props) {
 				onClick={() => setIsOpen()}
 				className={cn(
 					buttonVariants({ variant: "ghost" }),
-					"absolute top-0 bottom-0 right-0 w-[8px] cursor-pointer rounded-none focus:outline-none"
+					"absolute top-0 right-0 bottom-0 w-[8px] cursor-pointer rounded-none focus:outline-none"
 				)}></button>
 		</motion.aside>
 	)

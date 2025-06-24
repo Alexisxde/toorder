@@ -76,7 +76,7 @@ export const Sheet = ({
 							// exit={{ opacity: 0, transition: delay: 0.1 }}
 							// transition={{ duration: 0.2 }}
 							{...framerSidebarBackground}
-							className="fixed top-0 right-0 bottom-0 left-0 z-40 bg-[rgba(0,0,0,0.1)] backdrop-blur-sm"
+							className="fixed top-0 right-0 bottom-0 left-0 z-40"
 						/>
 						<motion.div
 							initial={{ x: "200%" }}
@@ -85,8 +85,8 @@ export const Sheet = ({
 							transition={{ duration: 0.15 }}
 							className={cn(sheetVariants({ size }), className)}
 							ref={ref}>
-							<div className="flex items-center justify-between border-b-1 border-neutral-800 p-4">
-								<h3 className="text-lg font-medium">{title}</h3>
+							<div className="flex h-12 items-center justify-between border-b-1 border-neutral-800 p-4">
+								<h3 className="text-base font-medium">{title}</h3>
 								<Button
 									rippleColor="#202724"
 									variant="ghost"

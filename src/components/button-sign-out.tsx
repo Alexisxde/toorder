@@ -63,7 +63,7 @@ export default function SignOutButton({ user }: Props) {
 						height="28"
 						className="inline-block size-7 rounded-full object-cover object-center"
 					/>
-		    </div>
+				</div>
 				{isOpen && (
 					<motion.div
 						layout
@@ -84,7 +84,7 @@ export default function SignOutButton({ user }: Props) {
 				initial={wrapperVariants.closed}
 				variants={wrapperVariants}
 				style={{ originY: "bottom" }}
-				className="absolute top-[-205px] left-0 w-full flex flex-col gap-2 rounded-md border border-neutral-200 bg-neutral-100 p-2 text-[11px] dark:border-neutral-800 dark:bg-neutral-900">
+				className="absolute top-[-205px] left-0 z-30 flex w-full flex-col gap-2 rounded-md border border-neutral-200 bg-neutral-100 p-2 text-[11px] dark:border-neutral-800 dark:bg-neutral-900">
 				<div className="flex flex-col border-b-1 border-neutral-200 p-1 dark:border-neutral-800">
 					<span className="text-xs">{user?.user_name}</span>
 					<span className="mb-1 text-[11px] text-neutral-600 dark:text-neutral-400">

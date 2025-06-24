@@ -13,9 +13,17 @@ interface ProjectState {
 		description: string
 	}) => Promise<void>
 	getProjects: () => Promise<void>
+	updatePinnedProject: ({
+		id,
+		pinned
+	}: {
+		id: string
+		pinned: boolean
+	}) => Promise<void>
 }
 
 const supabase = createClient()
+let debounceTimeout: NodeJS.Timeout
 
 export const useProjectStore = create<ProjectState>((set, get) => ({
 	projects: null,
@@ -46,5 +54,25 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
 			.select()
 			.eq("user_id", user?.id)
 		set({ projects: data || null, loading: false })
+	},
+	updatePinnedProject: async ({ id, pinned }) => {
+		const currentState = get().projects
+		const updatedProject = currentState?.map(project =>
+			project.id == id ? { ...project, pinned } : project
+		)
+		set({ projects: updatedProject })
+
+		if (debounceTimeout) {
+			clearTimeout(debounceTimeout)
+		}
+
+		debounceTimeout = setTimeout(async () => {
+			try {
+				await supabase.from("tasks").update({ pinned }).eq("id", id)
+			} catch (error) {
+				console.error("Error updating task:", error) // eslint-disable-line no-console
+				set({ projects: currentState })
+			}
+		}, 3000)
 	}
 }))

@@ -28,7 +28,7 @@ export default function Card({ task, handleDragStart }: Props) {
 				layoutId={id}
 				draggable
 				onDragStart={e => handleDragStart(e, task)}
-				className="cursor-grab space-y-1 rounded-md border border-neutral-800 bg-neutral-900 p-4 active:cursor-grabbing">
+				className="mt-2 cursor-grab space-y-1 rounded-md border border-neutral-800 bg-neutral-900 p-4 active:cursor-grabbing">
 				<div className="flex flex-col gap-2">
 					<span className="inline-flex items-center gap-1 text-[11px] font-normal text-neutral-400">
 						<CalendarDaysIcon width="16px" height="16px" />
