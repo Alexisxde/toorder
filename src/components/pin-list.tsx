@@ -33,13 +33,13 @@ export function PinList({ items, className, ...props }: PinListProps) {
 		transition: { duration: 0.22, ease: "easeInOut" }
 	}
 
-	const toggleStatus = (id: Pick<Project, "id">) => {
-		const item = listItems.find((u: Project) => u.id === id)
+	const toggleStatus = (id: string) => {
+		const item = listItems.find(u => u.id === id)
 		if (!item) return
 
 		setTogglingGroup(item.pinned ? "pinned" : "unpinned")
 		setListItems(prev => {
-			const idx = prev.findIndex((u: Project) => u.id === id)
+			const idx = prev.findIndex((u: Project) => u.id == id)
 			if (idx === -1) return prev
 			const updated = [...prev]
 			const [item] = updated.splice(idx, 1)
