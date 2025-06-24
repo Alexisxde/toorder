@@ -10,6 +10,7 @@ export type User = Database["public"]["Tables"]["users"]["Row"] & {
 export interface Project {
 	id: Database["public"]["Tables"]["projects"]["Row"]["id"]
 	name: Database["public"]["Tables"]["projects"]["Row"]["name"]
+	description: Database["public"]["Tables"]["projects"]["Row"]["description"]
 	created: Database["public"]["Tables"]["projects"]["Row"]["created_at"]
 	pinned: Database["public"]["Tables"]["projects"]["Row"]["pinned"]
 }
